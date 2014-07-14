@@ -1,20 +1,21 @@
 package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.Recording;
-import lombok.Getter;
 
-//Represents the state of the interpreter after it has found the reading for the first tyre of a vehicle crossing the hose A
-public class FrontTyreCrossedState implements InterpreterState{
+//Represents the state of the interpreter after it has found the readingOfFirstTyre for the first tyre of a vehicle crossing the hose A
+public class FrontTyreCrossedState implements InterpreterState {
 
-  @Getter
-  private Reading reading;
+  private final Reading readingOfFirstTyre;
 
-  protected FrontTyreCrossedState(Reading reading) {
-    this.reading = reading;
+  protected FrontTyreCrossedState(Reading readingOfFirstTyre) {
+    this.readingOfFirstTyre = readingOfFirstTyre;
   }
 
   @Override
-  public InterpreterState input(Reading reading) {
+  public InterpreterState input(Reading readingOfSecondTyre) {
+    if (readingOfSecondTyre.isOfPointA()) {
+      return NorthBoundVehicleFoundState.with(readingOfFirstTyre, readingOfSecondTyre);
+    }
     return null;
   }
 
@@ -28,7 +29,7 @@ public class FrontTyreCrossedState implements InterpreterState{
     return null;
   }
 
-  public static InterpreterState with(Reading reading) {
+  public static FrontTyreCrossedState with(Reading reading) {
     return new FrontTyreCrossedState(reading);
   }
 }

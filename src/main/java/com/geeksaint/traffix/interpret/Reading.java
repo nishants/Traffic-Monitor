@@ -13,4 +13,8 @@ public class Reading {
   public static Reading of(String value) {
     return new Reading(value);
   }
+
+  public boolean isOfPointA() {
+    return value.startsWith("A");
+  }
 }
