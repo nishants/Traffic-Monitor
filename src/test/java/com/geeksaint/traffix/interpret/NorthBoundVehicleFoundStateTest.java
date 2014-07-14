@@ -1,6 +1,7 @@
 package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.Recording;
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +9,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import static com.geeksaint.traffix.interpret.Reading.of;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -15,7 +17,7 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Recording.class)
+@PrepareForTest(fullyQualifiedNames = {"com.geeksaint.traffix.Recording", "com.geeksaint.traffix.interpret.FrontTyreCrossedState"})
 public class NorthBoundVehicleFoundStateTest {
 
   private Reading readingOfSecondAxle;
@@ -39,5 +41,18 @@ public class NorthBoundVehicleFoundStateTest {
 
     assertThat(northBoundVehicleFoundState.hasOutput(), is(true));
     assertThat(northBoundVehicleFoundState.getOutput(), is(expectedOutput));
+  }
+
+  @Test
+  public void nextStateMustBeInitialFrontTyreCrossedState(){
+    Reading nextReading = of("A123");
+
+    FrontTyreCrossedState expectedState = new FrontTyreCrossedState(nextReading);
+
+    mockStatic(FrontTyreCrossedState.class);
+    when(FrontTyreCrossedState.with(nextReading)).thenReturn(expectedState);
+
+    InterpreterState nextState = northBoundVehicleFoundState.input(nextReading);
+    assertThat(expectedState, is(nextState));
   }
 }

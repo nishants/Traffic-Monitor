@@ -16,7 +16,7 @@ public class NorthBoundVehicleFoundState implements InterpreterState {
 
   @Override
   public InterpreterState input(Reading reading) {
-    return null;
+    return FrontTyreCrossedState.with(reading);
   }
 
   @Override
