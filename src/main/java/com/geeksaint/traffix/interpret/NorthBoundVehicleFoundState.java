@@ -4,19 +4,19 @@ import com.geeksaint.traffix.Recording;
 
 import static java.util.Arrays.asList;
 
-//Represents a state in which interpreter has discovered readings for second tyre of a north bound vehicle.
+//Represents a state in which interpreter has discovered readings for second axle of a north bound vehicle.
 public class NorthBoundVehicleFoundState implements InterpreterState {
-  private final Reading readingOfFirstTyre;
-  private final Reading readingOfSecondTyre;
+  private final Reading readingOfFirstAxle;
+  private final Reading readingOfSecondAxle;
 
-  public NorthBoundVehicleFoundState(Reading readingOfFirstTyre, Reading readingOfSecondTyre) {
-    this.readingOfFirstTyre = readingOfFirstTyre;
-    this.readingOfSecondTyre = readingOfSecondTyre;
+  public NorthBoundVehicleFoundState(Reading readingOfFirstAxle, Reading readingOfSecondAxle) {
+    this.readingOfFirstAxle = readingOfFirstAxle;
+    this.readingOfSecondAxle = readingOfSecondAxle;
   }
 
   @Override
   public InterpreterState input(Reading reading) {
-    return FrontTyreCrossedState.with(reading);
+    return FrontAxleCrossedState.with(reading);
   }
 
   @Override
@@ -26,10 +26,10 @@ public class NorthBoundVehicleFoundState implements InterpreterState {
 
   @Override
   public Recording getOutput() {
-    return Recording.record(asList(readingOfFirstTyre, readingOfSecondTyre));
+    return Recording.record(asList(readingOfFirstAxle, readingOfSecondAxle));
   }
 
-  public static NorthBoundVehicleFoundState with(Reading readingOfFirstTyre, Reading readingOfSecondTyre) {
-    return new NorthBoundVehicleFoundState(readingOfFirstTyre, readingOfSecondTyre);
+  public static NorthBoundVehicleFoundState with(Reading readingOfFirstAxle, Reading readingOfSecondAxle) {
+    return new NorthBoundVehicleFoundState(readingOfFirstAxle, readingOfSecondAxle);
   }
 }

@@ -14,31 +14,31 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(NorthBoundVehicleFoundState.class)
-public class FrontTyreCrossedStateTest {
-  private FrontTyreCrossedState frontTyreCrossedState;
-  private Reading readingOfFirstTyre;
+public class FrontAxleCrossedStateTest {
+  private FrontAxleCrossedState frontAxleCrossedState;
+  private Reading readingOfFirstAxle;
 
   @Before
   public void setup() {
-    readingOfFirstTyre = of("A1001");
-    frontTyreCrossedState = FrontTyreCrossedState.with(readingOfFirstTyre);
+    readingOfFirstAxle = of("A1001");
+    frontAxleCrossedState = FrontAxleCrossedState.with(readingOfFirstAxle);
   }
 
   @Test
   public void shouldNotBeOutputState() {
-    assertThat(frontTyreCrossedState.getOutput(), is(nullValue()));
-    assertThat(frontTyreCrossedState.hasOutput(), is(false));
+    assertThat(frontAxleCrossedState.getOutput(), is(nullValue()));
+    assertThat(frontAxleCrossedState.hasOutput(), is(false));
   }
 
   @Test
   public void shouldTransitToNorthBoundVehicleFoundState() {
-    Reading readingOfSecondTyre = of("A123");
-    NorthBoundVehicleFoundState expectedState = new NorthBoundVehicleFoundState(readingOfFirstTyre, readingOfSecondTyre);
+    Reading readingOfSecondAxle = of("A123");
+    NorthBoundVehicleFoundState expectedState = new NorthBoundVehicleFoundState(readingOfFirstAxle, readingOfSecondAxle);
 
     PowerMockito.mockStatic(NorthBoundVehicleFoundState.class);
-    PowerMockito.when(NorthBoundVehicleFoundState.with(readingOfFirstTyre, readingOfSecondTyre)).thenReturn(expectedState);
+    PowerMockito.when(NorthBoundVehicleFoundState.with(readingOfFirstAxle, readingOfSecondAxle)).thenReturn(expectedState);
 
-    InterpreterState nextState = frontTyreCrossedState.input(readingOfSecondTyre);
+    InterpreterState nextState = frontAxleCrossedState.input(readingOfSecondAxle);
     assertThat(expectedState, is(nextState));
   }
 }

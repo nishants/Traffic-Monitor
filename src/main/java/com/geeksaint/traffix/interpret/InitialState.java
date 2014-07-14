@@ -6,7 +6,7 @@ public class InitialState implements InterpreterState {
 
   @Override
   public InterpreterState input(Reading reading) {
-    return FrontTyreCrossedState.with(reading);
+    return FrontAxleCrossedState.with(reading);
   }
 
   @Override
