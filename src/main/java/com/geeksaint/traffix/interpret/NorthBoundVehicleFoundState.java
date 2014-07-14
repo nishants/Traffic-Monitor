@@ -2,8 +2,10 @@ package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.Recording;
 
+import static java.util.Arrays.asList;
+
 //Represents a state in which interpreter has discovered readings for second tyre of a north bound vehicle.
-public class NorthBoundVehicleFoundState implements InterpreterState{
+public class NorthBoundVehicleFoundState implements InterpreterState {
   private final Reading readingOfFirstTyre;
   private final Reading readingOfSecondTyre;
 
@@ -19,12 +21,12 @@ public class NorthBoundVehicleFoundState implements InterpreterState{
 
   @Override
   public boolean hasOutput() {
-    return false;
+    return true;
   }
 
   @Override
   public Recording getOutput() {
-    return null;
+    return Recording.record(asList(readingOfFirstTyre, readingOfSecondTyre));
   }
 
   public static NorthBoundVehicleFoundState with(Reading readingOfFirstTyre, Reading readingOfSecondTyre) {
