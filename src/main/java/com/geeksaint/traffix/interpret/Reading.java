@@ -2,19 +2,19 @@ package com.geeksaint.traffix.interpret;
 
 import lombok.Getter;
 
+import java.util.Date;
+
+@Getter
 public class Reading {
-  @Getter
-  private final String value;
+  private final Date time;
+  private final boolean ofPointA;
 
-  public Reading(String value) {
-    this.value = value;
+  protected Reading(Date time, Boolean ofPointA) {
+    this.time = time;
+    this.ofPointA = ofPointA;
   }
 
-  public static Reading of(String value) {
-    return new Reading(value);
-  }
-
-  public boolean isOfPointA() {
-    return value.startsWith("A");
+  public static Reading of(Date recordedAt, Boolean goingNorth) {
+    return new Reading(recordedAt, goingNorth);
   }
 }

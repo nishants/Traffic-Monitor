@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static com.geeksaint.traffix.interpret.Reading.of;
+import static com.geeksaint.traffix.maker.ReadingMaker.pointAReading;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -24,9 +24,8 @@ public class NorthBoundVehicleFoundStateTest {
 
   @Before
   public void setup() {
-    readingOfFirstAxle = Reading.of("A1001");
-    readingOfSecondAxle = Reading.of("A1162");
-
+    readingOfFirstAxle = pointAReading;
+    readingOfSecondAxle = pointAReading;
     northBoundVehicleFoundState = NorthBoundVehicleFoundState.with(readingOfFirstAxle, readingOfSecondAxle);
   }
 
@@ -43,7 +42,7 @@ public class NorthBoundVehicleFoundStateTest {
 
   @Test
   public void nextStateMustBeInitialFrontAxleCrossedState(){
-    Reading nextReading = of("A123");
+    Reading nextReading = pointAReading;
 
     FrontAxleCrossedState expectedState = new FrontAxleCrossedState(nextReading);
 

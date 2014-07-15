@@ -7,7 +7,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static com.geeksaint.traffix.interpret.Reading.of;
+import static com.geeksaint.traffix.maker.ReadingMaker.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
@@ -20,7 +20,7 @@ public class FrontAxleCrossedStateTest {
 
   @Before
   public void setup() {
-    readingOfFirstAxle = of("A1001");
+    readingOfFirstAxle = pointAReading;
     frontAxleCrossedState = FrontAxleCrossedState.with(readingOfFirstAxle);
   }
 
@@ -32,7 +32,7 @@ public class FrontAxleCrossedStateTest {
 
   @Test
   public void shouldTransitToNorthBoundVehicleFoundState() {
-    Reading readingOfSecondAxle = of("A123");
+    Reading readingOfSecondAxle = pointAReading;
     NorthBoundVehicleFoundState expectedState = new NorthBoundVehicleFoundState(readingOfFirstAxle, readingOfSecondAxle);
 
     PowerMockito.mockStatic(NorthBoundVehicleFoundState.class);

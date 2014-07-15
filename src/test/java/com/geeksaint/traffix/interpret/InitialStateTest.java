@@ -8,7 +8,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static com.geeksaint.traffix.interpret.InitialState.create;
-import static com.geeksaint.traffix.interpret.Reading.*;
+import static com.geeksaint.traffix.maker.ReadingMaker.pointAReading;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.*;
 import static org.junit.Assert.assertThat;
@@ -32,7 +32,7 @@ public class InitialStateTest {
   @Test
   public void nextStateShouldBeFrontAxleStateForValidInput() {
     PowerMockito.mockStatic(FrontAxleCrossedState.class);
-    Reading reading = of("A123");
+    Reading reading = pointAReading;
     FrontAxleCrossedState expectedState = new FrontAxleCrossedState(reading);
     PowerMockito.when(FrontAxleCrossedState.with(reading)).thenReturn(expectedState);
 
