@@ -1,6 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
-import com.geeksaint.traffix.Recording;
+import com.geeksaint.traffix.VehicleData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,7 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(fullyQualifiedNames = {"com.geeksaint.traffix.Recording", "com.geeksaint.traffix.interpret.FrontAxleCrossedState"})
+@PrepareForTest(fullyQualifiedNames = {"com.geeksaint.traffix.VehicleData", "com.geeksaint.traffix.interpret.FrontAxleCrossedState"})
 public class NorthBoundVehicleFoundStateTest {
 
   private Reading readingOfSecondAxle;
@@ -31,10 +31,10 @@ public class NorthBoundVehicleFoundStateTest {
 
   @Test
   public void shouldHaveOutput() {
-    Recording expectedOutput = Recording.record(asList(readingOfFirstAxle, readingOfSecondAxle));
+    VehicleData expectedOutput = VehicleData.record(asList(readingOfFirstAxle, readingOfSecondAxle));
 
-    mockStatic(Recording.class);
-    when(Recording.record(asList(readingOfFirstAxle, readingOfSecondAxle))).thenReturn(expectedOutput);
+    mockStatic(VehicleData.class);
+    when(VehicleData.record(asList(readingOfFirstAxle, readingOfSecondAxle))).thenReturn(expectedOutput);
 
     assertThat(northBoundVehicleFoundState.hasOutput(), is(true));
     assertThat(northBoundVehicleFoundState.getOutput(), is(expectedOutput));

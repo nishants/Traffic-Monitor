@@ -1,6 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
-import com.geeksaint.traffix.Recording;
+import com.geeksaint.traffix.VehicleData;
 
 public class InitialState implements InterpreterState {
 
@@ -15,7 +15,7 @@ public class InitialState implements InterpreterState {
   }
 
   @Override
-  public Recording getOutput() {
+  public VehicleData getOutput() {
     return null;
   }
 

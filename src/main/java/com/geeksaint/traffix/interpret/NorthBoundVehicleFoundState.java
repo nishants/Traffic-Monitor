@@ -1,6 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
-import com.geeksaint.traffix.Recording;
+import com.geeksaint.traffix.VehicleData;
 
 import static java.util.Arrays.asList;
 
@@ -25,8 +25,8 @@ public class NorthBoundVehicleFoundState implements InterpreterState {
   }
 
   @Override
-  public Recording getOutput() {
-    return Recording.record(asList(readingOfFirstAxle, readingOfSecondAxle));
+  public VehicleData getOutput() {
+    return VehicleData.record(asList(readingOfFirstAxle, readingOfSecondAxle));
   }
 
   public static NorthBoundVehicleFoundState with(Reading readingOfFirstAxle, Reading readingOfSecondAxle) {

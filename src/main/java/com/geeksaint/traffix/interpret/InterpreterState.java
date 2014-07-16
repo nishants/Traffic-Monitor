@@ -1,6 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
-import com.geeksaint.traffix.Recording;
+import com.geeksaint.traffix.VehicleData;
 
 public interface InterpreterState {
   //Takes the input and returns the next state of the interpreter
@@ -10,5 +10,5 @@ public interface InterpreterState {
   boolean hasOutput();
 
   //Returns output or null
-  Recording getOutput();
+  VehicleData getOutput();
 }

@@ -1,6 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
-import com.geeksaint.traffix.Recording;
+import com.geeksaint.traffix.VehicleData;
 
 //Represents the state of the interpreter after it has found the readingOfFirstAxle for the first axle of a vehicle crossing the hose A
 public class FrontAxleCrossedState implements InterpreterState {
@@ -13,7 +13,7 @@ public class FrontAxleCrossedState implements InterpreterState {
 
   @Override
   public InterpreterState input(Reading readingOfSecondAxle) {
-    if (readingOfSecondAxle.isOfPointA()) {
+    if (readingOfSecondAxle.isLaneA()) {
       return NorthBoundVehicleFoundState.with(readingOfFirstAxle, readingOfSecondAxle);
     }
     return null;
@@ -25,7 +25,7 @@ public class FrontAxleCrossedState implements InterpreterState {
   }
 
   @Override
-  public Recording getOutput() {
+  public VehicleData getOutput() {
     return null;
   }
 
