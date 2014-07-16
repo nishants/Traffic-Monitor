@@ -62,7 +62,6 @@ public class DataFileReaderTest {
     return calendar.getTime();
   }
 
-
   private InputStream recordFile(String fileName) {
     return getClass().getResourceAsStream(fileName);
   }
