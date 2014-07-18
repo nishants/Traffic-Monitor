@@ -16,7 +16,7 @@ public class VehicleData {
   private final Date timeAtHoseA;
   public static final float DEFAULT_AXLE_LENGTH = 2.5f;
 
-  protected VehicleData(float speed, Date timeAtHoseA) {
+  public VehicleData(float speed, Date timeAtHoseA) {
     this.speed = speed;
     this.timeAtHoseA = timeAtHoseA;
   }
