@@ -15,7 +15,7 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(fullyQualifiedNames = {"com.geeksaint.traffix.VehicleData", "com.geeksaint.traffix.interpret.FrontAxleCrossedState"})
+@PrepareForTest(fullyQualifiedNames = {"com.geeksaint.traffix.VehicleData", "com.geeksaint.traffix.interpret.FrontAxleOnHoseA"})
 public class NorthBoundVehicleFoundStateTest {
 
   private Reading readingOfSecondAxle;
@@ -44,10 +44,10 @@ public class NorthBoundVehicleFoundStateTest {
   public void nextStateMustBeInitialFrontAxleCrossedState(){
     Reading nextReading = pointAReading;
 
-    FrontAxleCrossedState expectedState = new FrontAxleCrossedState(nextReading);
+    FrontAxleOnHoseA expectedState = new FrontAxleOnHoseA(nextReading);
 
-    mockStatic(FrontAxleCrossedState.class);
-    when(FrontAxleCrossedState.with(nextReading)).thenReturn(expectedState);
+    mockStatic(FrontAxleOnHoseA.class);
+    when(FrontAxleOnHoseA.with(nextReading)).thenReturn(expectedState);
 
     InterpreterState nextState = northBoundVehicleFoundState.input(nextReading);
     assertThat(expectedState, is(nextState));

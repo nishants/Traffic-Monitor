@@ -14,20 +14,20 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(NorthBoundVehicleFoundState.class)
-public class FrontAxleCrossedStateTest {
-  private FrontAxleCrossedState frontAxleCrossedState;
+public class FrontAxleOnHoseATest {
+  private FrontAxleOnHoseA frontAxleOnHoseA;
   private Reading readingOfFirstAxle;
 
   @Before
   public void setup() {
     readingOfFirstAxle = pointAReading;
-    frontAxleCrossedState = FrontAxleCrossedState.with(readingOfFirstAxle);
+    frontAxleOnHoseA = FrontAxleOnHoseA.with(readingOfFirstAxle);
   }
 
   @Test
   public void shouldNotBeOutputState() {
-    assertThat(frontAxleCrossedState.getOutput(), is(nullValue()));
-    assertThat(frontAxleCrossedState.hasOutput(), is(false));
+    assertThat(frontAxleOnHoseA.getOutput(), is(nullValue()));
+    assertThat(frontAxleOnHoseA.hasOutput(), is(false));
   }
 
   @Test
@@ -38,7 +38,7 @@ public class FrontAxleCrossedStateTest {
     PowerMockito.mockStatic(NorthBoundVehicleFoundState.class);
     PowerMockito.when(NorthBoundVehicleFoundState.with(readingOfFirstAxle, readingOfSecondAxle)).thenReturn(expectedState);
 
-    InterpreterState nextState = frontAxleCrossedState.input(readingOfSecondAxle);
+    InterpreterState nextState = frontAxleOnHoseA.input(readingOfSecondAxle);
     assertThat(expectedState, is(nextState));
   }
 }

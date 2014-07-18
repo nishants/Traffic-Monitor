@@ -3,11 +3,11 @@ package com.geeksaint.traffix.interpret;
 import com.geeksaint.traffix.VehicleData;
 
 //Front Axle of a south bound vehicle crosses hose B
-public class FoundSouthHeaded implements InterpreterState{
+public class FrontAxleOnHoseB implements InterpreterState{
   private final Reading frontAxleHoseAReading;
   private final Reading frontAxleHoseBReading;
 
-  protected FoundSouthHeaded(Reading frontAxleHoseAReading, Reading frontAxleHoseBReading) {
+  protected FrontAxleOnHoseB(Reading frontAxleHoseAReading, Reading frontAxleHoseBReading) {
     this.frontAxleHoseAReading = frontAxleHoseAReading;
     this.frontAxleHoseBReading = frontAxleHoseBReading;
   }
@@ -28,6 +28,6 @@ public class FoundSouthHeaded implements InterpreterState{
   }
 
   public static InterpreterState withReadings(Reading frontAxleHoseAReading, Reading frontAxleHoseBReading) {
-    return new FoundSouthHeaded(frontAxleHoseAReading, frontAxleHoseBReading);
+    return new FrontAxleOnHoseB(frontAxleHoseAReading, frontAxleHoseBReading);
   }
 }

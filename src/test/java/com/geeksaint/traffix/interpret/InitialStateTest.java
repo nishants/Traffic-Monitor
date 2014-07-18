@@ -14,7 +14,7 @@ import static org.hamcrest.core.IsNull.*;
 import static org.junit.Assert.assertThat;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(FrontAxleCrossedState.class)
+@PrepareForTest(FrontAxleOnHoseA.class)
 public class InitialStateTest {
   private InitialState initialState;
 
@@ -31,10 +31,10 @@ public class InitialStateTest {
 
   @Test
   public void nextStateShouldBeFrontAxleStateForValidInput() {
-    PowerMockito.mockStatic(FrontAxleCrossedState.class);
+    PowerMockito.mockStatic(FrontAxleOnHoseA.class);
     Reading reading = pointAReading;
-    FrontAxleCrossedState expectedState = new FrontAxleCrossedState(reading);
-    PowerMockito.when(FrontAxleCrossedState.with(reading)).thenReturn(expectedState);
+    FrontAxleOnHoseA expectedState = new FrontAxleOnHoseA(reading);
+    PowerMockito.when(FrontAxleOnHoseA.with(reading)).thenReturn(expectedState);
 
     InterpreterState nextState = initialState.input(reading);
 

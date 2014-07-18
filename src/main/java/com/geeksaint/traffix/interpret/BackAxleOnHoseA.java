@@ -2,13 +2,21 @@ package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.VehicleData;
 
-/**
- * Created by Nishant on 7/18/14.
- */
 public class BackAxleOnHoseA implements InterpreterState{
+  private Reading frontAxleHoseAReading;
+  private Reading frontAxleHoseBReading;
+  private Reading backAxleHoseAReading;
+
+  public BackAxleOnHoseA(Reading frontAxleHoseAReading, Reading frontAxleHoseBReading, Reading backAxleHoseAReading) {
+
+    this.frontAxleHoseAReading = frontAxleHoseAReading;
+    this.frontAxleHoseBReading = frontAxleHoseBReading;
+    this.backAxleHoseAReading = backAxleHoseAReading;
+  }
+
   @Override
   public InterpreterState input(Reading reading) {
-    return null;
+    return SouthBoundVehicleFound.withReading(frontAxleHoseAReading, frontAxleHoseBReading, backAxleHoseAReading, reading);
   }
 
   @Override
@@ -21,7 +29,7 @@ public class BackAxleOnHoseA implements InterpreterState{
     return null;
   }
 
-  public static InterpreterState withReadings(Reading frontAxleHoseAReading, Reading frontAxleHoseBReading, Reading reading) {
-    return new BackAxleOnHoseA();
+  public static InterpreterState withReadings(Reading frontAxleHoseAReading, Reading frontAxleHoseBReading, Reading backAxleHoseAReading) {
+    return new BackAxleOnHoseA(frontAxleHoseAReading, frontAxleHoseBReading, backAxleHoseAReading);
   }
 }

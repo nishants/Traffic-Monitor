@@ -3,11 +3,11 @@ package com.geeksaint.traffix.interpret;
 import com.geeksaint.traffix.VehicleData;
 
 //Represents the state of the interpreter after it has found the readingOfFirstAxle for the first axle of a vehicle crossing the hose A
-public class FrontAxleCrossedState implements InterpreterState {
+public class FrontAxleOnHoseA implements InterpreterState {
 
   private final Reading readingOfFirstAxle;
 
-  protected FrontAxleCrossedState(Reading readingOfFirstAxle) {
+  protected FrontAxleOnHoseA(Reading readingOfFirstAxle) {
     this.readingOfFirstAxle = readingOfFirstAxle;
   }
 
@@ -29,7 +29,7 @@ public class FrontAxleCrossedState implements InterpreterState {
     return null;
   }
 
-  public static FrontAxleCrossedState with(Reading reading) {
-    return new FrontAxleCrossedState(reading);
+  public static FrontAxleOnHoseA with(Reading reading) {
+    return new FrontAxleOnHoseA(reading);
   }
 }

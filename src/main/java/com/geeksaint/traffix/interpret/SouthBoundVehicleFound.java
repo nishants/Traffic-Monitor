@@ -2,11 +2,10 @@ package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.VehicleData;
 
-public class InitialState implements InterpreterState {
-
+public class SouthBoundVehicleFound implements InterpreterState{
   @Override
   public InterpreterState input(Reading reading) {
-    return FrontAxleOnHoseA.with(reading);
+    return null;
   }
 
   @Override
@@ -19,7 +18,7 @@ public class InitialState implements InterpreterState {
     return null;
   }
 
-  public static InitialState create() {
-    return new InitialState();
+  public static InterpreterState withReading(Reading frontAxleHoseAReading, Reading frontAxleHoseBReading, Reading backAxleHoseAReading, Reading reading) {
+    return null;
   }
 }
