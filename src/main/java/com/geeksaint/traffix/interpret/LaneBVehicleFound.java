@@ -3,20 +3,21 @@ package com.geeksaint.traffix.interpret;
 import com.geeksaint.traffix.VehicleData;
 import lombok.EqualsAndHashCode;
 
+import static com.geeksaint.traffix.interpret.UnexpectedReadingException.*;
 import static java.util.Arrays.asList;
 
 //Back axle of a vehicle crossed the hose B
 @EqualsAndHashCode
-public class SouthBoundVehicleFound implements InterpreterState{
+public class LaneBVehicleFound implements InterpreterState{
   private final Reading frontAxleHoseAReading;
   private final Reading frontAxleHoseBReading;
   private final Reading backAxleHoseAReading;
   private final Reading backAxleHoseBReading;
 
-  private SouthBoundVehicleFound(Reading frontAxleHoseAReading,
-                                Reading frontAxleHoseBReading,
-                                Reading backAxleHoseAReading,
-                                Reading backAxleHoseBReading) {
+  private LaneBVehicleFound(Reading frontAxleHoseAReading,
+                            Reading frontAxleHoseBReading,
+                            Reading backAxleHoseAReading,
+                            Reading backAxleHoseBReading) {
     this.frontAxleHoseAReading = frontAxleHoseAReading;
     this.frontAxleHoseBReading = frontAxleHoseBReading;
     this.backAxleHoseAReading = backAxleHoseAReading;
@@ -25,6 +26,7 @@ public class SouthBoundVehicleFound implements InterpreterState{
 
   @Override
   public InterpreterState input(Reading reading) {
+    checkForHoseA(reading);
     return FrontAxleOnHoseA.with(reading);
   }
 
@@ -49,7 +51,7 @@ public class SouthBoundVehicleFound implements InterpreterState{
       Reading backAxleHoseAReading,
       Reading backAxleHoseBReading) {
 
-    return new SouthBoundVehicleFound(
+    return new LaneBVehicleFound(
         frontAxleHoseAReading,
         frontAxleHoseBReading,
         backAxleHoseAReading,

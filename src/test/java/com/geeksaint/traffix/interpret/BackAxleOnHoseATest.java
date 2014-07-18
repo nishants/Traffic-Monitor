@@ -1,11 +1,15 @@
 package com.geeksaint.traffix.interpret;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static com.geeksaint.traffix.Lane.LANE_A;
 import static com.geeksaint.traffix.Lane.LANE_B;
 import static com.geeksaint.traffix.maker.ReadingMaker.Reading;
+import static com.geeksaint.traffix.maker.ReadingMaker.hoseAReading;
+import static com.geeksaint.traffix.maker.ReadingMaker.hoseBReading;
 import static com.geeksaint.traffix.maker.ReadingMaker.lane;
 import static com.natpryce.makeiteasy.MakeItEasy.a;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
@@ -21,6 +25,9 @@ public class BackAxleOnHoseATest {
   private Reading frontAxleHoseAReading;
   private Reading frontAxleHoseBReading;
   private Reading backAxleHoseAReading;
+  @Rule
+  public ExpectedException expectedException = ExpectedException.none();
+
 
   @Before
   public void setup(){
@@ -32,6 +39,13 @@ public class BackAxleOnHoseATest {
   }
 
   @Test
+  public void shouldThrowExceptionIfNextReadingIsHoseA(){
+    expectedException.expect(UnexpectedReadingException.class);
+    expectedException.expectMessage("Expected hose B reading, found hose A");
+    state.input(hoseAReading);
+  }
+
+  @Test
   public void shouldNotHaveOutput(){
     assertThat(state.hasOutput(), is(false));
     assertThat(state.getOutput(), is(nullValue()));
@@ -39,15 +53,13 @@ public class BackAxleOnHoseATest {
 
   @Test
   public void nextStateMustBeSouthBoundVehicleRecorded(){
-    Reading backAxleHoseBReading = make(a(Reading, with(lane, LANE_B)));
-
-    InterpreterState expected = SouthBoundVehicleFound.withReadings(
+    InterpreterState expected = LaneBVehicleFound.withReadings(
         frontAxleHoseAReading,
         frontAxleHoseBReading,
         backAxleHoseAReading,
-        backAxleHoseBReading);
+        hoseBReading);
 
-    InterpreterState nextState = state.input(backAxleHoseBReading);
+    InterpreterState nextState = state.input(hoseBReading);
     assertThat(nextState, is(expected));
   }
 }

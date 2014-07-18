@@ -3,6 +3,8 @@ package com.geeksaint.traffix.interpret;
 import com.geeksaint.traffix.VehicleData;
 import lombok.EqualsAndHashCode;
 
+import static com.geeksaint.traffix.interpret.UnexpectedReadingException.*;
+
 @EqualsAndHashCode
 //Back axle crosses the hose A
 public class BackAxleOnHoseA implements InterpreterState{
@@ -19,7 +21,8 @@ public class BackAxleOnHoseA implements InterpreterState{
 
   @Override
   public InterpreterState input(Reading reading) {
-    return SouthBoundVehicleFound.withReadings(frontAxleHoseAReading, frontAxleHoseBReading, backAxleHoseAReading, reading);
+    checkForHoseB(reading);
+    return LaneBVehicleFound.withReadings(frontAxleHoseAReading, frontAxleHoseBReading, backAxleHoseAReading, reading);
   }
 
   @Override

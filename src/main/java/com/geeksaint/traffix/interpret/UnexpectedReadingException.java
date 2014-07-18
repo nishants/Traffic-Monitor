@@ -11,5 +11,7 @@ public class UnexpectedReadingException extends RuntimeException{
   public static void checkForHoseA(Reading reading){
     if(!reading.isHoseA()) throw new UnexpectedReadingException(EXPECTED_HOSE_A_READING);
   }
-
+  public static void checkForHoseB(Reading reading){
+    if(reading.isHoseA()) throw new UnexpectedReadingException(EXPECTED_HOSE_B_READING);
+  }
 }
