@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.Date;
 
 import static com.natpryce.makeiteasy.MakeItEasy.a;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
@@ -37,10 +38,10 @@ public class DumbVehicleDataRepositoryTest {
     repository.save(vehicleFour);
     repository.save(vehicleFive);
 
-    assertThat(repository.getAllVehiclesByTime(130l, 499l), is(asList(vehicleTwo, vehicleThree, vehicleFour)));
-    assertThat(repository.getAllVehiclesByTime(100l, 500l), is(asList(vehicleOne, vehicleTwo, vehicleThree, vehicleFour, vehicleFive)));
-    assertThat(repository.getAllVehiclesByTime(10l, 99l), is(Collections.<VehicleData>emptyList()));
-    assertThat(repository.getAllVehiclesByTime(510l, 590l), is(Collections.<VehicleData>emptyList()));
+    assertThat(repository.getAllVehiclesByTime(new Date(130l), new Date(499l)), is(asList(vehicleTwo, vehicleThree, vehicleFour)));
+    assertThat(repository.getAllVehiclesByTime(new Date(100l), new Date(500l)), is(asList(vehicleOne, vehicleTwo, vehicleThree, vehicleFour, vehicleFive)));
+    assertThat(repository.getAllVehiclesByTime(new Date(10l), new Date(99l)), is(Collections.<VehicleData>emptyList()));
+    assertThat(repository.getAllVehiclesByTime(new Date(510l), new Date(590l)), is(Collections.<VehicleData>emptyList()));
   }
 
   private VehicleData atTime(long value) {

@@ -3,6 +3,7 @@ package com.geeksaint.traffix.persist;
 import com.geeksaint.traffix.VehicleData;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -14,7 +15,9 @@ public class DumbVehicleDataRepository implements VehicleDataRepository {
     savedVehicleData.add(vehicle);
   }
 
-  public synchronized List<VehicleData> getAllVehiclesByTime(long startTime, long endTime){
+  public synchronized List<VehicleData> getAllVehiclesByTime(Date fromDate, Date toDate){
+    long startTime = fromDate.getTime();
+    long endTime = toDate.getTime();
     List<VehicleData> resultList = new ArrayList<VehicleData>();
     for(VehicleData vehicleData : savedVehicleData){
       long time = timeOf(vehicleData);
