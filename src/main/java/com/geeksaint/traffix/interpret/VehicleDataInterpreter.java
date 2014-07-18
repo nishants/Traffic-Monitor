@@ -5,7 +5,7 @@ import com.geeksaint.traffix.input.DataSource;
 
 import java.util.Iterator;
 
-public class VehicleDataInterpreter implements Iterator<VehicleData>{
+public class VehicleDataInterpreter implements Iterator<VehicleData> {
 
   private final DataSource dataSource;
   private InterpreterState state;
@@ -22,15 +22,17 @@ public class VehicleDataInterpreter implements Iterator<VehicleData>{
 
   @Override
   public VehicleData next() {
-    while(!state.hasOutput()){
+    do {
       state = state.input(dataSource.getNext());
-    }
+    } while (!state.hasOutput() && hasNext());
+
     return state.getOutput();
   }
 
   @Override
   public void remove() {
     throw new UnsupportedOperationException();
+
   }
 
   public static VehicleDataInterpreter load(DataSource dataSource) {

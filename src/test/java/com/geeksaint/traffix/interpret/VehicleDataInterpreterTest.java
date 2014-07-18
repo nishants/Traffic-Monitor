@@ -17,12 +17,12 @@ public class VehicleDataInterpreterTest {
   @Test
   public void takesReadingsFromSourceAndReturnsVehicle() {
     List<Reading> readingList = asList(
-        of((new Date(268981l)), true),
-        of((new Date(268981l)), true),
-        of((new Date(268981l)), true),
+        of((new Date(268581l)), true),
+        of((new Date(268681l)), true),
+        of((new Date(268781l)), true),
         of((new Date(268981l)), true)
     );
-    DataSource dataSource = mockeFor(readingList);
+    DataSource dataSource = mockedFor(readingList);
 
     VehicleData expectedOne = VehicleData.record(readingList.subList(0, 2));
     VehicleData expectedTwo = VehicleData.record(readingList.subList(2, 4));
@@ -34,7 +34,7 @@ public class VehicleDataInterpreterTest {
     assertThat(interpreter.next(), is(expectedTwo));
   }
 
-  private DataSource mockeFor(List<Reading> readingList) {
+  private DataSource mockedFor(List<Reading> readingList) {
     final Iterator<Reading> iterator = readingList.iterator();
     DataSource dataSource = new DataSource() {
       @Override
