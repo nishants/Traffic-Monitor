@@ -26,11 +26,19 @@ public class FrontAxleOnHoseATest {
   }
 
   @Test
-  public void shouldTransitToNorthBoundVehicleFoundState() {
+  public void shouldTransitToLaneVehicleFoundStateForHoseAReading() {
     Reading readingOfSecondAxle = hoseAReading;
     LaneAVehicleFoundState expectedState = LaneAVehicleFoundState.with(readingOfFirstAxle, readingOfSecondAxle);
 
     InterpreterState nextState = frontAxleOnHoseA.input(readingOfSecondAxle);
+    assertThat(expectedState, is(nextState));
+  }
+
+  @Test
+  public void shouldTransitToLaneVehicleFoundStateForHoseBReading() {
+    InterpreterState expectedState = FrontAxleOnHoseB.withReadings(readingOfFirstAxle, hoseBReading);
+
+    InterpreterState nextState = frontAxleOnHoseA.input(hoseBReading);
     assertThat(expectedState, is(nextState));
   }
 }

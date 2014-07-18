@@ -2,10 +2,12 @@ package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.Reading;
 import com.geeksaint.traffix.VehicleData;
+import lombok.EqualsAndHashCode;
 
 import static com.geeksaint.traffix.interpret.UnexpectedReadingException.*;
 
-//Front Axle of a south bound vehicle crosses hose B
+//Front Axle of a lane B vehicle crosses hose B
+@EqualsAndHashCode
 public class FrontAxleOnHoseB implements InterpreterState{
   private final Reading frontAxleHoseAReading;
   private final Reading frontAxleHoseBReading;
