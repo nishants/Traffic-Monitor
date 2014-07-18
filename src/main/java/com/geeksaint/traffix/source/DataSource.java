@@ -1,4 +1,4 @@
-package com.geeksaint.traffix.input;
+package com.geeksaint.traffix.source;
 
 import com.geeksaint.traffix.interpret.Reading;
 

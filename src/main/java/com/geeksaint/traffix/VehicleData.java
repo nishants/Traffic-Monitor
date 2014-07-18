@@ -13,7 +13,7 @@ public class VehicleData {
 
   private List<Reading> readings;
 
-  public VehicleData(List<Reading> readings) {
+  protected VehicleData(List<Reading> readings) {
     this.readings = readings;
   }
 

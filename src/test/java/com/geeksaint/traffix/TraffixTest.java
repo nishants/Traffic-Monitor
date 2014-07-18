@@ -1,9 +1,8 @@
 package com.geeksaint.traffix;
 
-import com.geeksaint.traffix.input.FileDataSource;
-import com.geeksaint.traffix.input.DataSource;
+import com.geeksaint.traffix.source.FileDataSource;
+import com.geeksaint.traffix.source.DataSource;
 import com.geeksaint.traffix.interpret.VehicleDataInterpreter;
-import com.geeksaint.traffix.maker.ReadingMaker;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import static com.geeksaint.traffix.Lane.*;
 import static com.geeksaint.traffix.VehicleData.*;
-import static com.geeksaint.traffix.interpret.Reading.of;
 import static com.geeksaint.traffix.maker.ReadingMaker.makeReading;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;

@@ -1,7 +1,7 @@
 package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.VehicleData;
-import com.geeksaint.traffix.input.DataSource;
+import com.geeksaint.traffix.source.DataSource;
 
 import java.util.Iterator;
 
@@ -32,7 +32,6 @@ public class VehicleDataInterpreter implements Iterator<VehicleData> {
   @Override
   public void remove() {
     throw new UnsupportedOperationException();
-
   }
 
   public static VehicleDataInterpreter load(DataSource dataSource) {
