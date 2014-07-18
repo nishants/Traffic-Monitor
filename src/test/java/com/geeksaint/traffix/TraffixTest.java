@@ -3,6 +3,7 @@ package com.geeksaint.traffix;
 import com.geeksaint.traffix.input.FileDataSource;
 import com.geeksaint.traffix.input.DataSource;
 import com.geeksaint.traffix.interpret.VehicleDataInterpreter;
+import com.geeksaint.traffix.maker.ReadingMaker;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -11,8 +12,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.geeksaint.traffix.Lane.*;
 import static com.geeksaint.traffix.VehicleData.*;
 import static com.geeksaint.traffix.interpret.Reading.of;
+import static com.geeksaint.traffix.maker.ReadingMaker.makeReading;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -27,35 +30,35 @@ public class TraffixTest {
 
     List<VehicleData> expectedList = asList(
         record(asList(
-            of(addToDate(recordingDate, 268981l), true),
-            of(addToDate(recordingDate, 269123l), true)
+            makeReading(recordingDate, 268981l, LANE_A),
+            makeReading(recordingDate, 269123l, LANE_A)
         )),
 
         record(asList(
-            of(addToDate(recordingDate, 604957l), true),
-            of(addToDate(recordingDate, 604960l), true)
+            makeReading(recordingDate, 604957l, LANE_A),
+            makeReading(recordingDate, 604960l, LANE_A)
         )),
 
         record(asList(
-            of(addToDate(recordingDate, 605128l), true),
-            of(addToDate(recordingDate, 605132l), true)
+            makeReading(recordingDate, 605128l, LANE_A),
+            makeReading(recordingDate, 605132l, LANE_A)
         )),
 
         record(asList(
-            of(addToDate(recordingDate, 1089807l), true),
-            of(addToDate(recordingDate, 1089810l), true)
+            makeReading(recordingDate, 1089807l, LANE_A),
+            makeReading(recordingDate, 1089810l, LANE_A)
         )),
         record(asList(
-            of(addToDate(recordingDate, 1089948l), true),
-            of(addToDate(recordingDate, 1089951l), true)
+            makeReading(recordingDate, 1089948l, LANE_A),
+            makeReading(recordingDate, 1089951l, LANE_A)
         )),
         record(asList(
-            of(addToDate(increment(recordingDate), 100l), true),
-            of(addToDate(increment(recordingDate), 1200), true)
+            makeReading(increment(recordingDate), 100l, LANE_A),
+            makeReading(increment(recordingDate), 1200, LANE_A)
         )),
         record(asList(
-            of(addToDate(increment(recordingDate), 1089948l), true),
-            of(addToDate(increment(recordingDate), 1089951l), true)
+            makeReading(increment(recordingDate), 1089948l, LANE_A),
+            makeReading(increment(recordingDate), 1089951l, LANE_A)
         ))
     );
     assertThat(vehicleDataList.size(), is(7));

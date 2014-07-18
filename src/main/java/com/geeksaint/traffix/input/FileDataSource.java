@@ -1,5 +1,6 @@
 package com.geeksaint.traffix.input;
 
+import com.geeksaint.traffix.Lane;
 import com.geeksaint.traffix.interpret.Reading;
 
 import java.io.InputStream;
@@ -47,12 +48,8 @@ public class FileDataSource implements DataSource {
   private Reading toReading(String token) {
     return Reading.of(
         currentDateOf(token),
-        isNorthBound(token)
+        Lane.of(token)
     );
-  }
-
-  private boolean isNorthBound(String token) {
-    return token.startsWith("A");
   }
 
   private Date currentDateOf(String token) {

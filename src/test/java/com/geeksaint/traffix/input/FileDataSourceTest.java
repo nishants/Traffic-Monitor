@@ -9,7 +9,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.geeksaint.traffix.interpret.Reading.*;
+import static com.geeksaint.traffix.Lane.LANE_A;
+import static com.geeksaint.traffix.Lane.LANE_B;
+import static com.geeksaint.traffix.maker.ReadingMaker.makeReading;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -22,18 +24,23 @@ public class FileDataSourceTest {
 
     Date recordingDate = toDate(1970, 1, 1);
     List<Reading> expectedList = asList(
-        of(addToDate(recordingDate, 268981l), true),
-        of(addToDate(recordingDate, 269123l), true),
-        of(addToDate(recordingDate, 604957l), true),
-        of(addToDate(recordingDate, 604960l), false),
-        of(addToDate(recordingDate, 605128l), true),
-        of(addToDate(recordingDate, 605132l), false),
-        of(addToDate(recordingDate, 1089807l), true),
-        of(addToDate(recordingDate, 1089810l), false),
-        of(addToDate(recordingDate, 1089948l), true),
-        of(addToDate(recordingDate, 1089951l), false),
-        of(addToDate(increment(recordingDate), 100l), true),
-        of(addToDate(increment(increment(recordingDate)), 20l), true)
+        makeReading(recordingDate, 268981l, LANE_A),
+        makeReading(recordingDate, 269123l, LANE_A),
+
+        makeReading(recordingDate, 604957l, LANE_A),
+        makeReading(recordingDate, 604960l, LANE_B),
+
+        makeReading(recordingDate, 605128l, LANE_A),
+        makeReading(recordingDate, 605132l, LANE_B),
+
+        makeReading(recordingDate, 1089807l, LANE_A),
+        makeReading(recordingDate, 1089810l, LANE_B),
+
+        makeReading(recordingDate, 1089948l, LANE_A),
+        makeReading(recordingDate, 1089951l, LANE_B),
+
+        makeReading(increment(recordingDate), 100, LANE_A),
+        makeReading(increment(increment(recordingDate)), 20, LANE_A)
     );
 
     assertThat(readList, is(expectedList));

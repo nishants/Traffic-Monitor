@@ -8,7 +8,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.geeksaint.traffix.Lane.LANE_A;
 import static com.geeksaint.traffix.interpret.Reading.of;
+import static com.geeksaint.traffix.maker.ReadingMaker.makeReading;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -17,10 +19,10 @@ public class VehicleDataInterpreterTest {
   @Test
   public void takesReadingsFromSourceAndReturnsVehicle() {
     List<Reading> readingList = asList(
-        of((new Date(268581l)), true),
-        of((new Date(268681l)), true),
-        of((new Date(268781l)), true),
-        of((new Date(268981l)), true)
+        makeReading((new Date()), 268581l, LANE_A),
+        makeReading((new Date()), 268681l, LANE_A),
+        makeReading((new Date()), 268781l, LANE_A),
+        makeReading((new Date()), 268581l, LANE_A)
     );
     DataSource dataSource = mockedFor(readingList);
 
