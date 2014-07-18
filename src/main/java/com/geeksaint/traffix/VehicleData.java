@@ -1,6 +1,5 @@
 package com.geeksaint.traffix;
 
-import com.geeksaint.traffix.interpret.Reading;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

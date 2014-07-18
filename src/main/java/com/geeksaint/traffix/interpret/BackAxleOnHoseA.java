@@ -1,5 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
+import com.geeksaint.traffix.Reading;
 import com.geeksaint.traffix.VehicleData;
 import lombok.EqualsAndHashCode;
 

@@ -1,5 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
+import com.geeksaint.traffix.Reading;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,7 +23,7 @@ import static org.junit.Assert.assertThat;
 public class BackAxleOnHoseATest {
 
   private InterpreterState state;
-  private Reading frontAxleHoseAReading;
+  private com.geeksaint.traffix.Reading frontAxleHoseAReading;
   private Reading frontAxleHoseBReading;
   private Reading backAxleHoseAReading;
   @Rule

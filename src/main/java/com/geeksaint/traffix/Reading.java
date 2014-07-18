@@ -1,6 +1,5 @@
-package com.geeksaint.traffix.interpret;
+package com.geeksaint.traffix;
 
-import com.geeksaint.traffix.Lane;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -12,6 +11,7 @@ import static com.geeksaint.traffix.Lane.*;
 @Getter
 @EqualsAndHashCode
 @ToString
+//Represents a reading form the source eg. A12322 or B542323
 public class Reading {
   private final Date time;
   private final Lane laneA;

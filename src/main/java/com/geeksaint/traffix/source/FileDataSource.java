@@ -1,7 +1,7 @@
 package com.geeksaint.traffix.source;
 
 import com.geeksaint.traffix.Lane;
-import com.geeksaint.traffix.interpret.Reading;
+import com.geeksaint.traffix.Reading;
 
 import java.io.InputStream;
 import java.util.Calendar;

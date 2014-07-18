@@ -1,5 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
+import com.geeksaint.traffix.Reading;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ import static org.junit.Assert.assertThat;
 
 public class FrontAxleOnHoseATest {
   private FrontAxleOnHoseA frontAxleOnHoseA;
-  private Reading readingOfFirstAxle;
+  private com.geeksaint.traffix.Reading readingOfFirstAxle;
 
   @Before
   public void setup() {

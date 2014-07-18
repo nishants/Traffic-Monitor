@@ -1,5 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
+import com.geeksaint.traffix.Reading;
 import com.geeksaint.traffix.VehicleData;
 import org.junit.Before;
 import org.junit.Rule;
@@ -20,7 +21,7 @@ import static org.junit.Assert.assertThat;
 
 public class LaneBVehicleFoundTest {
   private InterpreterState state;
-  private Reading frontAxleHoseAReading;
+  private com.geeksaint.traffix.Reading frontAxleHoseAReading;
   private Reading frontAxleHoseBReading;
   private Reading backAxleHoseAReading;
   private Reading backAxleHoseBReading;

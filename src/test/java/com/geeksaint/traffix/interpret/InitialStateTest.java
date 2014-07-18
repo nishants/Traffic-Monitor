@@ -1,5 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
+import com.geeksaint.traffix.Reading;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

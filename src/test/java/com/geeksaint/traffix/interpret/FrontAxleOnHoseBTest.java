@@ -1,7 +1,6 @@
 package com.geeksaint.traffix.interpret;
 
-import com.geeksaint.traffix.maker.ReadingMaker;
-import oracle.jrockit.jfr.Recording;
+import com.geeksaint.traffix.Reading;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,7 +18,7 @@ import static org.junit.Assert.assertThat;
 public class FrontAxleOnHoseBTest {
 
   private InterpreterState state;
-  private Reading frontAxleHoseAReading;
+  private com.geeksaint.traffix.Reading frontAxleHoseAReading;
   private Reading frontAxleHoseBReading;
   @Rule
   public ExpectedException expectedException = ExpectedException.none();

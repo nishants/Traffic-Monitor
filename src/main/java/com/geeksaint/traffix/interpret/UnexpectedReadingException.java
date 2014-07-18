@@ -1,5 +1,7 @@
 package com.geeksaint.traffix.interpret;
 
+import com.geeksaint.traffix.Reading;
+
 public class UnexpectedReadingException extends RuntimeException{
   public static final String EXPECTED_HOSE_A_READING = "Expected hose A reading, found hose B";
   public static final String EXPECTED_HOSE_B_READING = "Expected hose B reading, found hose A";

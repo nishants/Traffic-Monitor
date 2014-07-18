@@ -1,6 +1,6 @@
 package com.geeksaint.traffix.source;
 
-import com.geeksaint.traffix.interpret.Reading;
+import com.geeksaint.traffix.Reading;
 import org.junit.Test;
 
 import java.io.InputStream;
