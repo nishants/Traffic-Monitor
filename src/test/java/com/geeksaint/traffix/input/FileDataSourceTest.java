@@ -14,10 +14,10 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class DataFileReaderTest {
+public class FileDataSourceTest {
   @Test
   public void shouldReadFile() {
-    DataFileReader reader = new DataFileReader(1970, 1, 1, recordFile("/data/test_data_reader.txt"));
+    FileDataSource reader = new FileDataSource(1970, 1, 1, recordFile("/data/test_data_reader.txt"));
     List<Reading> readList = readUsing(reader);
 
     Date recordingDate = toDate(1970, 1, 1);
@@ -66,7 +66,7 @@ public class DataFileReaderTest {
     return getClass().getResourceAsStream(fileName);
   }
 
-  private List<Reading> readUsing(DataFileReader reader) {
+  private List<Reading> readUsing(FileDataSource reader) {
     List<Reading> readList = new ArrayList<Reading>();
     while (reader.hasNext()) {
       readList.add(reader.getNext());

@@ -1,8 +1,7 @@
 package com.geeksaint.traffix;
 
-import com.geeksaint.traffix.input.DataFileReader;
+import com.geeksaint.traffix.input.FileDataSource;
 import com.geeksaint.traffix.input.DataSource;
-import com.geeksaint.traffix.interpret.Reading;
 import com.geeksaint.traffix.interpret.VehicleDataInterpreter;
 import org.junit.Test;
 
@@ -22,7 +21,7 @@ public class TraffixTest {
   @Test
   public void shouldReadDataAndConvertToVehicleData() {
     Date recordingDate = toDate(1970, 1, 1);
-    DataSource dataSource = new DataFileReader(1970, 1, 1, recordFile("/data/sample_data.txt"));
+    DataSource dataSource = new FileDataSource(1970, 1, 1, recordFile("/data/sample_data.txt"));
     VehicleDataInterpreter interpreter = VehicleDataInterpreter.load(dataSource);
     List<VehicleData> vehicleDataList = collectDataUsing(interpreter);
 

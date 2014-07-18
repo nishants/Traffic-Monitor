@@ -10,12 +10,12 @@ import java.util.Scanner;
 import static java.lang.Long.*;
 
 //Represent a reading source backed by a file
-public class DataFileReader implements DataSource {
+public class FileDataSource implements DataSource {
   private final Scanner scanner;
   private Date currentDayOfRecording;
   private long lastRecordingTime;
 
-  public DataFileReader(int day, int month, int year, InputStream inputStream) {
+  public FileDataSource(int day, int month, int year, InputStream inputStream) {
     currentDayOfRecording = toDate(day, month, year);
     scanner = new Scanner(inputStream);
   }
