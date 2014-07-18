@@ -3,9 +3,8 @@ package com.geeksaint.traffix.interpret;
 import com.geeksaint.traffix.VehicleData;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import static com.geeksaint.traffix.maker.ReadingMaker.pointAReading;
+import static com.geeksaint.traffix.maker.ReadingMaker.hoseAReading;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -18,8 +17,8 @@ public class NorthBoundVehicleFoundStateTest {
 
   @Before
   public void setup() {
-    readingOfFirstAxle = pointAReading;
-    readingOfSecondAxle = pointAReading;
+    readingOfFirstAxle = hoseAReading;
+    readingOfSecondAxle = hoseAReading;
     northBoundVehicleFoundState = NorthBoundVehicleFoundState.with(readingOfFirstAxle, readingOfSecondAxle);
   }
 
@@ -32,7 +31,7 @@ public class NorthBoundVehicleFoundStateTest {
 
   @Test
   public void nextStateMustBeInitialFrontAxleCrossedState() {
-    Reading nextReading = pointAReading;
+    Reading nextReading = hoseAReading;
 
     FrontAxleOnHoseA expectedState = FrontAxleOnHoseA.with(nextReading);
 

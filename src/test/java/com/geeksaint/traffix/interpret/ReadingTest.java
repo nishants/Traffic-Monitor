@@ -1,6 +1,5 @@
 package com.geeksaint.traffix.interpret;
 
-import com.geeksaint.traffix.Lane;
 import org.junit.Test;
 
 import java.util.Date;
@@ -15,9 +14,9 @@ public class ReadingTest {
   @Test
   public void shouldMakeAReading() {
     Reading pointAReading = of(new Date(0l), LANE_A);
-    assertThat(pointAReading.isLaneA(), is(true));
+    assertThat(pointAReading.isHoseA(), is(true));
 
     Reading pointBReading = of(new Date(0l), LANE_B);
-    assertThat(pointBReading.isLaneA(), is(false));
+    assertThat(pointBReading.isHoseA(), is(false));
   }
 }

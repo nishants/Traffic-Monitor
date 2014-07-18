@@ -8,6 +8,7 @@ import com.natpryce.makeiteasy.PropertyLookup;
 
 import java.util.Date;
 
+import static com.geeksaint.traffix.Lane.*;
 import static com.natpryce.makeiteasy.MakeItEasy.a;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
 import static com.natpryce.makeiteasy.MakeItEasy.with;
@@ -19,7 +20,7 @@ public class ReadingMaker {
   public static final Instantiator<Reading> Reading = new Instantiator<Reading>() {
     public Reading instantiate(PropertyLookup<Reading> lookup) {
       Date recordedAt = lookup.valueOf(time, new Date(0l));
-      Lane goingNorth = lookup.valueOf(lane, Lane.LANE_A);
+      Lane goingNorth = lookup.valueOf(lane, LANE_A);
       return com.geeksaint.traffix.interpret.Reading.of(recordedAt, goingNorth);
     }
   };
@@ -32,7 +33,8 @@ public class ReadingMaker {
     return new Date(observedOn.getTime() + timeInMillis);
   }
 
-  public static Reading pointAReading = make(a(Reading));
+  public static Reading hoseAReading = make(a(Reading));
+  public static Reading hoseBReading = make(a(Reading, with(lane, LANE_B)));
 }
 
 

@@ -14,7 +14,7 @@ public class FrontAxleOnHoseATest {
 
   @Before
   public void setup() {
-    readingOfFirstAxle = pointAReading;
+    readingOfFirstAxle = hoseAReading;
     frontAxleOnHoseA = FrontAxleOnHoseA.with(readingOfFirstAxle);
   }
 
@@ -26,7 +26,7 @@ public class FrontAxleOnHoseATest {
 
   @Test
   public void shouldTransitToNorthBoundVehicleFoundState() {
-    Reading readingOfSecondAxle = pointAReading;
+    Reading readingOfSecondAxle = hoseAReading;
     NorthBoundVehicleFoundState expectedState = NorthBoundVehicleFoundState.with(readingOfFirstAxle, readingOfSecondAxle);
 
     InterpreterState nextState = frontAxleOnHoseA.input(readingOfSecondAxle);
