@@ -2,23 +2,54 @@ package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.VehicleData;
 
+import static java.util.Arrays.asList;
+
 public class SouthBoundVehicleFound implements InterpreterState{
+  private final Reading frontAxleHoseAReading;
+  private final Reading frontAxleHoseBReading;
+  private final Reading backAxleHoseAReading;
+  private final Reading backAxleHoseBReading;
+
+  public SouthBoundVehicleFound(Reading frontAxleHoseAReading,
+                                Reading frontAxleHoseBReading,
+                                Reading backAxleHoseAReading,
+                                Reading backAxleHoseBReading) {
+    this.frontAxleHoseAReading = frontAxleHoseAReading;
+    this.frontAxleHoseBReading = frontAxleHoseBReading;
+    this.backAxleHoseAReading = backAxleHoseAReading;
+    this.backAxleHoseBReading = backAxleHoseBReading;
+  }
+
   @Override
   public InterpreterState input(Reading reading) {
-    return null;
+    return FrontAxleOnHoseA.with(reading);
   }
 
   @Override
   public boolean hasOutput() {
-    return false;
+    return true;
   }
 
   @Override
   public VehicleData getOutput() {
-    return null;
+    return VehicleData.record(asList(
+        frontAxleHoseAReading,
+        frontAxleHoseBReading,
+        backAxleHoseAReading,
+        backAxleHoseBReading
+    ));
   }
 
-  public static InterpreterState withReading(Reading frontAxleHoseAReading, Reading frontAxleHoseBReading, Reading backAxleHoseAReading, Reading reading) {
-    return null;
+  public static InterpreterState withReadings(
+      Reading frontAxleHoseAReading,
+      Reading frontAxleHoseBReading,
+      Reading backAxleHoseAReading,
+      Reading backAxleHoseBReading) {
+
+    return new SouthBoundVehicleFound(
+        frontAxleHoseAReading,
+        frontAxleHoseBReading,
+        backAxleHoseAReading,
+        backAxleHoseBReading);
   }
 }

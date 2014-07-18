@@ -41,7 +41,7 @@ public class NorthBoundVehicleFoundStateTest {
   }
 
   @Test
-  public void nextStateMustBeInitialFrontAxleCrossedState(){
+  public void nextStateMustBeInitialFrontAxleCrossedState() {
     Reading nextReading = pointAReading;
 
     FrontAxleOnHoseA expectedState = new FrontAxleOnHoseA(nextReading);

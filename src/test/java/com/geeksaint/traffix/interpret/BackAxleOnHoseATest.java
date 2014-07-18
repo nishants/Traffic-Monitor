@@ -3,7 +3,6 @@ package com.geeksaint.traffix.interpret;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -53,7 +52,7 @@ public class BackAxleOnHoseATest {
     mockStatic(SouthBoundVehicleFound.class);
 
     InterpreterState expected = mock(SouthBoundVehicleFound.class);
-    when(SouthBoundVehicleFound.withReading(
+    when(SouthBoundVehicleFound.withReadings(
         frontAxleHoseAReading,
         frontAxleHoseBReading,
         backAxleHoseAReading,

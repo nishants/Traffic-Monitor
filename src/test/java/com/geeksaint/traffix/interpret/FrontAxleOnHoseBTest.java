@@ -11,7 +11,6 @@ import static com.geeksaint.traffix.maker.ReadingMaker.*;
 import static com.natpryce.makeiteasy.MakeItEasy.a;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
 import static com.natpryce.makeiteasy.MakeItEasy.with;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -28,20 +27,20 @@ public class FrontAxleOnHoseBTest {
   private Reading frontAxleHoseBReading;
 
   @Before
-  public void setup(){
+  public void setup() {
     frontAxleHoseAReading = make(a(Reading, with(lane, LANE_A)));
     frontAxleHoseBReading = make(a(Reading, with(lane, LANE_B)));
     state = FrontAxleOnHoseB.withReadings(frontAxleHoseAReading, frontAxleHoseBReading);
   }
 
   @Test
-  public void shouldHaveNoOutput(){
+  public void shouldHaveNoOutput() {
     assertThat(state.hasOutput(), is(false));
     assertThat(state.getOutput(), is(nullValue()));
   }
 
   @Test
-  public void nextStateMustBeBackAxleOnHoseA(){
+  public void nextStateMustBeBackAxleOnHoseA() {
     Reading backAxleHoseBReading = make(a(Reading, with(lane, LANE_B)));
 
     InterpreterState expected = mock(BackAxleOnHoseA.class);

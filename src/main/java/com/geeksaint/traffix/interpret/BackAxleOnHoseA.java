@@ -16,7 +16,7 @@ public class BackAxleOnHoseA implements InterpreterState{
 
   @Override
   public InterpreterState input(Reading reading) {
-    return SouthBoundVehicleFound.withReading(frontAxleHoseAReading, frontAxleHoseBReading, backAxleHoseAReading, reading);
+    return SouthBoundVehicleFound.withReadings(frontAxleHoseAReading, frontAxleHoseBReading, backAxleHoseAReading, reading);
   }
 
   @Override
