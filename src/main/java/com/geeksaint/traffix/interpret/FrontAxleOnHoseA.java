@@ -16,7 +16,7 @@ public class FrontAxleOnHoseA implements InterpreterState {
   @Override
   public InterpreterState input(Reading readingOfSecondAxle) {
     if (readingOfSecondAxle.isHoseA()) {
-      return NorthBoundVehicleFoundState.with(readingOfFirstAxle, readingOfSecondAxle);
+      return LaneAVehicleFoundState.with(readingOfFirstAxle, readingOfSecondAxle);
     }
     return null;
   }
