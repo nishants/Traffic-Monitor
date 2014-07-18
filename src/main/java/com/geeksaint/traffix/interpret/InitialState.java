@@ -4,6 +4,8 @@ import com.geeksaint.traffix.VehicleData;
 
 public class InitialState implements InterpreterState {
 
+  private InitialState(){}
+
   @Override
   public InterpreterState input(Reading reading) {
     return FrontAxleOnHoseA.with(reading);

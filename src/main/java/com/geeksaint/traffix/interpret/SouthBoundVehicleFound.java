@@ -13,7 +13,7 @@ public class SouthBoundVehicleFound implements InterpreterState{
   private final Reading backAxleHoseAReading;
   private final Reading backAxleHoseBReading;
 
-  public SouthBoundVehicleFound(Reading frontAxleHoseAReading,
+  private SouthBoundVehicleFound(Reading frontAxleHoseAReading,
                                 Reading frontAxleHoseBReading,
                                 Reading backAxleHoseAReading,
                                 Reading backAxleHoseBReading) {

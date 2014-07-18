@@ -10,7 +10,7 @@ public class BackAxleOnHoseA implements InterpreterState{
   private Reading frontAxleHoseBReading;
   private Reading backAxleHoseAReading;
 
-  public BackAxleOnHoseA(Reading frontAxleHoseAReading, Reading frontAxleHoseBReading, Reading backAxleHoseAReading) {
+  private BackAxleOnHoseA(Reading frontAxleHoseAReading, Reading frontAxleHoseBReading, Reading backAxleHoseAReading) {
 
     this.frontAxleHoseAReading = frontAxleHoseAReading;
     this.frontAxleHoseBReading = frontAxleHoseBReading;

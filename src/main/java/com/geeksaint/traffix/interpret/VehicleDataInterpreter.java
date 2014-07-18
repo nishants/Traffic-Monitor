@@ -12,7 +12,7 @@ public class VehicleDataInterpreter implements Iterator<VehicleData> {
 
   public VehicleDataInterpreter(DataSource dataSource) {
     this.dataSource = dataSource;
-    state = new InitialState();
+    state = InitialState.create();
   }
 
   @Override

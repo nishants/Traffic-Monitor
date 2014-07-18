@@ -11,7 +11,7 @@ public class NorthBoundVehicleFoundState implements InterpreterState {
   private final Reading readingOfFirstAxle;
   private final Reading readingOfSecondAxle;
 
-  public NorthBoundVehicleFoundState(Reading readingOfFirstAxle, Reading readingOfSecondAxle) {
+  private NorthBoundVehicleFoundState(Reading readingOfFirstAxle, Reading readingOfSecondAxle) {
     this.readingOfFirstAxle = readingOfFirstAxle;
     this.readingOfSecondAxle = readingOfSecondAxle;
   }

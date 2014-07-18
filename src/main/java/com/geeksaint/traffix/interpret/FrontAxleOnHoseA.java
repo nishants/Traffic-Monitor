@@ -9,7 +9,7 @@ public class FrontAxleOnHoseA implements InterpreterState {
 
   private final Reading readingOfFirstAxle;
 
-  protected FrontAxleOnHoseA(Reading readingOfFirstAxle) {
+  private FrontAxleOnHoseA(Reading readingOfFirstAxle) {
     this.readingOfFirstAxle = readingOfFirstAxle;
   }
 
