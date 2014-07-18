@@ -4,10 +4,11 @@ import com.geeksaint.traffix.Lane;
 import com.geeksaint.traffix.Reading;
 
 import java.io.InputStream;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
+import static com.geeksaint.traffix.util.DateSupport.addDaysTo;
+import static com.geeksaint.traffix.util.DateSupport.toDateOfYear;
 import static java.lang.Long.*;
 
 //Represent a reading source backed by a file
@@ -17,20 +18,8 @@ public class FileDataSource implements DataSource {
   private long lastRecordingTime;
 
   public FileDataSource(int day, int month, int year, InputStream inputStream) {
-    currentDayOfRecording = toDate(day, month, year);
+    currentDayOfRecording = toDateOfYear(day, month, year);
     scanner = new Scanner(inputStream);
-  }
-
-  private Date toDate(int day, int month, int year) {
-    Calendar calendar = Calendar.getInstance();
-    calendar.set(Calendar.MILLISECOND, 0);
-    calendar.set(Calendar.SECOND, 0);
-    calendar.set(Calendar.MINUTE, 0);
-    calendar.set(Calendar.HOUR_OF_DAY, 0);
-    calendar.set(Calendar.YEAR, year);
-    calendar.set(Calendar.MONTH, month);
-    calendar.set(Calendar.DAY_OF_MONTH, day);
-    return calendar.getTime();
   }
 
   @Override
@@ -54,15 +43,11 @@ public class FileDataSource implements DataSource {
 
   private Date currentDateOf(String token) {
     long time = parseLong(token.substring(1));
-    if (lastRecordingTime > time) incrementCurrentDayOfRecording();
+    if (lastRecordingTime > time){
+      currentDayOfRecording = addDaysTo(currentDayOfRecording, 1);
+    }
     lastRecordingTime = time;
     return new Date(currentDayOfRecording.getTime() + time);
   }
 
-  private void incrementCurrentDayOfRecording() {
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTimeInMillis(currentDayOfRecording.getTime());
-    calendar.add(Calendar.DAY_OF_MONTH, 1);
-    currentDayOfRecording = calendar.getTime();
-  }
 }

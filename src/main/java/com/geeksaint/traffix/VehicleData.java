@@ -26,7 +26,7 @@ public class VehicleData {
         evaluateSpeedForLaneA(readings, DEFAULT_AXLE_LENGTH) :
         evaluateSpeedForLaneB(readings, DEFAULT_AXLE_LENGTH);
 
-    Date timeAtHoseA = fronAxleHoseATime(readings);
+    Date timeAtHoseA = frontAxleHoseATime(readings);
     return new VehicleData(speed, timeAtHoseA);
   }
 
@@ -42,7 +42,7 @@ public class VehicleData {
     return (speedByHoseA + speedByHoseB) / 2;
   }
 
-  private static Date fronAxleHoseATime(List<Reading> readings) {
+  private static Date frontAxleHoseATime(List<Reading> readings) {
     return readings.get(0).getTime();
   }
 
