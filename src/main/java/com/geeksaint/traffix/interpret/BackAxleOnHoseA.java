@@ -1,7 +1,10 @@
 package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.VehicleData;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
+//Back axle crosses the hose A
 public class BackAxleOnHoseA implements InterpreterState{
   private Reading frontAxleHoseAReading;
   private Reading frontAxleHoseBReading;

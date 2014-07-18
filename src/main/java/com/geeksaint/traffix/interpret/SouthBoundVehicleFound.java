@@ -1,9 +1,12 @@
 package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.VehicleData;
+import lombok.EqualsAndHashCode;
 
 import static java.util.Arrays.asList;
 
+//Back axle of a vehicle crossed the hose B
+@EqualsAndHashCode
 public class SouthBoundVehicleFound implements InterpreterState{
   private final Reading frontAxleHoseAReading;
   private final Reading frontAxleHoseBReading;

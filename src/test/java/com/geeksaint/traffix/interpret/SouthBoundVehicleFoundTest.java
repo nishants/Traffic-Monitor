@@ -3,7 +3,6 @@ package com.geeksaint.traffix.interpret;
 import com.geeksaint.traffix.VehicleData;
 import org.junit.Before;
 import org.junit.Test;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 
 import static com.geeksaint.traffix.Lane.LANE_A;
 import static com.geeksaint.traffix.Lane.LANE_B;

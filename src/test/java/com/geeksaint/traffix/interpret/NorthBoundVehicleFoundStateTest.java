@@ -4,18 +4,12 @@ import com.geeksaint.traffix.VehicleData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static com.geeksaint.traffix.maker.ReadingMaker.pointAReading;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.when;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(fullyQualifiedNames = {"com.geeksaint.traffix.VehicleData", "com.geeksaint.traffix.interpret.FrontAxleOnHoseA"})
 public class NorthBoundVehicleFoundStateTest {
 
   private Reading readingOfSecondAxle;
@@ -31,23 +25,16 @@ public class NorthBoundVehicleFoundStateTest {
 
   @Test
   public void shouldHaveOutput() {
-    VehicleData expectedOutput = VehicleData.record(asList(readingOfFirstAxle, readingOfSecondAxle));
-
-    mockStatic(VehicleData.class);
-    when(VehicleData.record(asList(readingOfFirstAxle, readingOfSecondAxle))).thenReturn(expectedOutput);
-
+    VehicleData expected = VehicleData.record(asList(readingOfFirstAxle, readingOfSecondAxle));
     assertThat(northBoundVehicleFoundState.hasOutput(), is(true));
-    assertThat(northBoundVehicleFoundState.getOutput(), is(expectedOutput));
+    assertThat(northBoundVehicleFoundState.getOutput(), is(expected));
   }
 
   @Test
   public void nextStateMustBeInitialFrontAxleCrossedState() {
     Reading nextReading = pointAReading;
 
-    FrontAxleOnHoseA expectedState = new FrontAxleOnHoseA(nextReading);
-
-    mockStatic(FrontAxleOnHoseA.class);
-    when(FrontAxleOnHoseA.with(nextReading)).thenReturn(expectedState);
+    FrontAxleOnHoseA expectedState = FrontAxleOnHoseA.with(nextReading);
 
     InterpreterState nextState = northBoundVehicleFoundState.input(nextReading);
     assertThat(expectedState, is(nextState));

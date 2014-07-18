@@ -2,10 +2,6 @@ package com.geeksaint.traffix.interpret;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static com.geeksaint.traffix.interpret.InitialState.create;
 import static com.geeksaint.traffix.maker.ReadingMaker.pointAReading;
@@ -13,8 +9,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.*;
 import static org.junit.Assert.assertThat;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(FrontAxleOnHoseA.class)
 public class InitialStateTest {
   private InitialState initialState;
 
@@ -31,10 +25,8 @@ public class InitialStateTest {
 
   @Test
   public void nextStateShouldBeFrontAxleStateForValidInput() {
-    PowerMockito.mockStatic(FrontAxleOnHoseA.class);
     Reading reading = pointAReading;
-    FrontAxleOnHoseA expectedState = new FrontAxleOnHoseA(reading);
-    PowerMockito.when(FrontAxleOnHoseA.with(reading)).thenReturn(expectedState);
+    FrontAxleOnHoseA expectedState = FrontAxleOnHoseA.with(reading);
 
     InterpreterState nextState = initialState.input(reading);
 
