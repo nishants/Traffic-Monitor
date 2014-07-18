@@ -1,7 +1,11 @@
 package com.geeksaint.traffix.interpret;
 
+import com.geeksaint.traffix.maker.ReadingMaker;
+import oracle.jrockit.jfr.Recording;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static com.geeksaint.traffix.Lane.*;
 import static com.geeksaint.traffix.maker.ReadingMaker.*;
@@ -17,12 +21,21 @@ public class FrontAxleOnHoseBTest {
   private InterpreterState state;
   private Reading frontAxleHoseAReading;
   private Reading frontAxleHoseBReading;
+  @Rule
+  public ExpectedException expectedException = ExpectedException.none();
 
   @Before
   public void setup() {
     frontAxleHoseAReading = make(a(Reading, with(lane, LANE_A)));
     frontAxleHoseBReading = make(a(Reading, with(lane, LANE_B)));
     state = FrontAxleOnHoseB.withReadings(frontAxleHoseAReading, frontAxleHoseBReading);
+  }
+
+  @Test
+  public void shouldThrowExceptionIfNextReadingIsHoseB(){
+    expectedException.expect(UnexpectedReadingException.class);
+    expectedException.expectMessage("Expected hose A reading, found hose B");
+    state.input(hoseBReading);
   }
 
   @Test
@@ -33,10 +46,9 @@ public class FrontAxleOnHoseBTest {
 
   @Test
   public void nextStateMustBeBackAxleOnHoseA() {
-    Reading backAxleHoseBReading = make(a(Reading, with(lane, LANE_B)));
-    InterpreterState expected = BackAxleOnHoseA.withReadings(frontAxleHoseAReading, frontAxleHoseBReading, backAxleHoseBReading);
+    InterpreterState expected = BackAxleOnHoseA.withReadings(frontAxleHoseAReading, frontAxleHoseBReading, hoseAReading);
 
-    InterpreterState nextState = state.input(backAxleHoseBReading);
+    InterpreterState nextState = state.input(hoseAReading);
 
     assertThat(nextState, is(expected));
   }

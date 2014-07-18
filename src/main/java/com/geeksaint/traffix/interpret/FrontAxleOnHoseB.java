@@ -2,6 +2,8 @@ package com.geeksaint.traffix.interpret;
 
 import com.geeksaint.traffix.VehicleData;
 
+import static com.geeksaint.traffix.interpret.UnexpectedReadingException.*;
+
 //Front Axle of a south bound vehicle crosses hose B
 public class FrontAxleOnHoseB implements InterpreterState{
   private final Reading frontAxleHoseAReading;
@@ -14,6 +16,7 @@ public class FrontAxleOnHoseB implements InterpreterState{
 
   @Override
   public InterpreterState input(Reading reading) {
+    checkForHoseA(reading);
     return BackAxleOnHoseA.withReadings(frontAxleHoseAReading, frontAxleHoseBReading, reading);
   }
 
