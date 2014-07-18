@@ -59,9 +59,20 @@ public class TraffixTest {
             makeReading(increment(recordingDate), 269123l, LANE_B),
             makeReading(increment(recordingDate), 604957l, LANE_A),
             makeReading(increment(recordingDate), 604960l, LANE_B)
+        )),
+        record(asList(
+            makeReading(increment(recordingDate), 605128l, LANE_A),
+            makeReading(increment(recordingDate), 605132l, LANE_A)
+        )),
+        record(asList(
+            makeReading(increment(recordingDate), 1089807l, LANE_A),
+            makeReading(increment(recordingDate), 1089810l, LANE_B),
+            makeReading(increment(recordingDate), 1089948l, LANE_A),
+            makeReading(increment(recordingDate), 1089951l, LANE_B)
+
         ))
     );
-    assertThat(vehicleDataList.size(), is(7));
+    assertThat(vehicleDataList.size(), is(9));
     assertThat(vehicleDataList, is(expectedList));
   }
 
