@@ -65,6 +65,7 @@ public class VehicleDataTest {
     assertThat(vehicleData.isLaneA(), is(false));
     assertThat(vehicleData.getTime(), is(frontAxleHoseAReading.getTime()));
   }
+
   @Test
   public void shouldReturnTimeInSeconds(){
     Calendar calendar = Calendar.getInstance();
