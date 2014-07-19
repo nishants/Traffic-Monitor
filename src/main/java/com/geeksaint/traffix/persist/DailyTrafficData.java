@@ -40,7 +40,7 @@ public class DailyTrafficData implements TrafficData {
 
   private void setupSlotData() {
     for(int i =0; i< SLOTS_PER_DAY; i++){
-      slotDataList[i] = new SlotData();
+      slotDataList[i] = SlotData.create();
     }
   }
 
