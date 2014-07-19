@@ -14,15 +14,15 @@ import static org.junit.Assert.assertThat;
 
 public class DateSupportTest {
   @Test
-  public void shouldReturnTimeOfDay(){
+  public void shouldReturnTimeOfDay() {
     Calendar calendar = Calendar.getInstance();
     calendar.set(2014, JANUARY, 3, 1, 1, 1);
     int timeInSec = timeOfDayInSeconds(calendar.getTime());
-    assertThat(timeInSec, is(1*60*60 + 1 *60+ 1));
+    assertThat(timeInSec, is(1 * 60 * 60 + 1 * 60 + 1));
   }
 
   @Test
-  public void shouldConvertToMinutes(){
+  public void shouldConvertToMinutes() {
     Calendar calendar = Calendar.getInstance();
     calendar.set(2014, JANUARY, 3, 1, 1, 1);
     int timeInMin = timeOfDayInMinutes(calendar.getTime());
@@ -31,10 +31,24 @@ public class DateSupportTest {
   }
 
   @Test
-  public void shouldReturnDateString(){
+  public void shouldReturnDateString() {
     Calendar calendar = Calendar.getInstance();
     calendar.set(2014, JANUARY, 3, 1, 1, 1);
     Date date = calendar.getTime();
     assertThat(toDateStamp(date), is("030114"));
+  }
+
+  @Test
+  public void shouldTranslateToDate() {
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(2014, JANUARY, 3, 11, 41, 13);
+    Date date = calendar.getTime();
+
+    calendar = Calendar.getInstance();
+    calendar.set(2014, JANUARY, 3, 0, 0, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
+    Date expected = calendar.getTime();
+
+    assertThat(DateSupport.toDateOfYear(date), is(expected));
   }
 }

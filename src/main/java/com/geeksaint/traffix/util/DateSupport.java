@@ -18,10 +18,7 @@ public class DateSupport {
 
   public static Date toDateOfYear(int day, int month, int year) {
     Calendar calendar = Calendar.getInstance();
-    calendar.set(MILLISECOND, 0);
-    calendar.set(SECOND, 0);
-    calendar.set(MINUTE, 0);
-    calendar.set(HOUR_OF_DAY, 0);
+    resetTimeComponent(calendar);
     calendar.set(YEAR, year);
     calendar.set(MONTH, month);
     calendar.set(DAY_OF_MONTH, day);
@@ -47,18 +44,18 @@ public class DateSupport {
   public static int timeOfDayInSeconds(Date time) {
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(time);
-    return calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60+
-        calendar.get(Calendar.MINUTE) * 60+
+    return calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 +
+        calendar.get(Calendar.MINUTE) * 60 +
         calendar.get(Calendar.SECOND);
   }
 
   //Converts the time into minutes past since 00:00
   public static int timeOfDayInMinutes(Date time) {
-    return timeOfDayInSeconds(time)/60;
+    return timeOfDayInSeconds(time) / 60;
   }
 
   // Return date stamp of format ddmmyy eg. 030114 for 3rd Jan 2012
-  public static String toDateStamp(Date date){
+  public static String toDateStamp(Date date) {
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(date);
     SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMYY");
@@ -88,5 +85,19 @@ public class DateSupport {
 
   public static int hourOf(String timeStampInMMSS) {
     return parseInt(timeStampInMMSS.substring(0, 2));
+  }
+
+  public static Date toDateOfYear(Date date) {
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(date);
+    resetTimeComponent(calendar);
+    return calendar.getTime();
+  }
+
+  private static void resetTimeComponent(Calendar calendar) {
+    calendar.set(MILLISECOND, 0);
+    calendar.set(SECOND, 0);
+    calendar.set(MINUTE, 0);
+    calendar.set(HOUR_OF_DAY, 0);
   }
 }

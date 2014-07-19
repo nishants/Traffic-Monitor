@@ -42,22 +42,21 @@ public class DataRepositoryTest {
     TrafficReport expectedReportOne   = reportFor(vehicleOne, vehicleTwo);
     TrafficReport expectedReportTwo   = reportFor(vehicleThree, vehicleFour);
     TrafficReport expectedReportThree = reportFor(vehicleFive);
-    TrafficReport expectedReportFour  = expectedReportZero.merge(expectedReportOne).merge(expectedReportTwo);
-    TrafficReport expectedReportFive  = expectedReportZero.merge(expectedReportOne).merge(expectedReportTwo).merge(expectedReportThree);
+    TrafficReport expectedReportFour  = expectedReportZero.merge(expectedReportOne);
 
-    repository.add(vehicleZero);
-    repository.add(vehicleOne);
-    repository.add(vehicleTwo);
-    repository.add(vehicleThree);
-    repository.add(vehicleFour);
-    repository.add(vehicleFive);
+    repository.save(vehicleZero);
+    repository.save(vehicleOne);
+    repository.save(vehicleTwo);
+    repository.save(vehicleThree);
+    repository.save(vehicleFour);
+    repository.save(vehicleFive);
     repository.buildIndex();
 
-    assertThat(repository.report(toMinutes("0300"), toMinutes("0305")), is(expectedReportOne));
-    assertThat(repository.report(toMinutes("0315"), toMinutes("0316")), is(expectedReportTwo));
-    assertThat(repository.report(toMinutes("0220"), toMinutes("0225")), is(expectedReportZero));
-    assertThat(repository.report(toMinutes("1420"), toMinutes("1425")), is(expectedReportThree));
-    assertThat(repository.report(toMinutes("0200"), toMinutes("0325")), is(expectedReportFour));
-    assertThat(repository.report(toMinutes("0000"), toMinutes("2400")), is(expectedReportFive));
+    assertThat(repository.report(toMinutes("0300"), toMinutes("0305")).getForDay(0), is(expectedReportOne));
+    assertThat(repository.report(toMinutes("0315"), toMinutes("0316")).getForDay(1), is(expectedReportTwo));
+    assertThat(repository.report(toMinutes("0220"), toMinutes("0225")).getForDay(0), is(expectedReportZero));
+    assertThat(repository.report(toMinutes("1420"), toMinutes("1425")).getForDay(1), is(expectedReportThree));
+    assertThat(repository.report(toMinutes("0200"), toMinutes("0325")).getForDay(0), is(expectedReportFour));
+    assertThat(repository.report(toMinutes("0200"), toMinutes("0325")).getForDay(1), is(expectedReportTwo));
   }
 }
