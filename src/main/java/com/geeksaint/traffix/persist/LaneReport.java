@@ -61,4 +61,8 @@ public class LaneReport {
     }
     return sum;
   }
+
+  public static LaneReport emptyReport(Lane lane) {
+    return new LaneReport(lane, 0l, 0.0, 0l);
+  }
 }

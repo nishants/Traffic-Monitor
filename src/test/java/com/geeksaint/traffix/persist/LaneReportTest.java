@@ -57,4 +57,13 @@ public class LaneReportTest {
     assertThat(mergedReport.getVehicleCount(), is(8l));
     assertThat(mergedReport.getSumOfDistances(), is(78l));
   }
+
+  @Test
+  public void shouldCreateAnEmptyList(){
+    LaneReport emptyReport = LaneReport.emptyReport(LANE_A);
+    assertThat(emptyReport.getLane(), is(LANE_A));
+    assertThat(emptyReport.getVehicleCount(), is(0l));
+    assertThat(emptyReport.getSumOfSpeeds(), is(0.0));
+    assertThat(emptyReport.getSumOfDistances(), is(0l));
+  }
 }

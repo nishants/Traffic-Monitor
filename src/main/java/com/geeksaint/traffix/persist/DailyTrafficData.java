@@ -1,24 +1,17 @@
 package com.geeksaint.traffix.persist;
 
 import com.geeksaint.traffix.VehicleData;
-import lombok.Getter;
 
 import static com.geeksaint.traffix.util.DateSupport.timeOfDayInMinutes;
 import static java.lang.Math.min;
-import static java.lang.String.format;
 
 public class DailyTrafficData implements TrafficData {
   private final int SLOTS_PER_DAY = 288;
   private final int SLOTS_SIZE_IN_MINUTES = 5;
   private final SlotData[] slotDataList ;
 
-  @Getter
-  private final String dataId;
-  private final static String ID_FORMAT = "%d%d%d";
-
-  public DailyTrafficData(int day, int month, int year){
+  public DailyTrafficData(){
     slotDataList = new SlotData[SLOTS_PER_DAY];
-    dataId = format(ID_FORMAT, day, month, year);
     setupSlotData();
   }
 
@@ -65,5 +58,9 @@ public class DailyTrafficData implements TrafficData {
     int timeInMinutes = timeOfDayInMinutes(vehicleData.getTime());
     int slotIndex = timeInMinutes / SLOTS_SIZE_IN_MINUTES;
     return slotDataList[slotIndex];
+  }
+
+  public static TrafficData create() {
+    return new DailyTrafficData();
   }
 }

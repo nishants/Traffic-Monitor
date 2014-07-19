@@ -62,4 +62,13 @@ public class TrafficReportTest {
     assertThat(mergedTrafficReport.getLaneAReport(), is(mergedLaneAReport));
     assertThat(mergedTrafficReport.getLaneBReport(), is(mergedLaneBReport));
   }
+
+  @Test
+  public void shouldCreateEmptyList(){
+    TrafficReport emptyReport = TrafficReport.emptyReport();
+    LaneReport emptyLaneAReport = LaneReport.emptyReport(LANE_A);
+    LaneReport emptyLaneBReport = LaneReport.emptyReport(LANE_B);
+    assertThat(emptyReport.getLaneAReport(), is(emptyLaneAReport));
+    assertThat(emptyReport.getLaneBReport(), is(emptyLaneBReport));
+  }
 }

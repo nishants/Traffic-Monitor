@@ -8,15 +8,12 @@ import java.util.Date;
 
 import static com.geeksaint.traffix.Lane.LANE_A;
 import static com.geeksaint.traffix.Lane.LANE_B;
-import static com.geeksaint.traffix.maker.TrafficReportMaker.Report;
-import static com.geeksaint.traffix.maker.TrafficReportMaker.vehicleData;
+import static com.geeksaint.traffix.maker.VehicleDataMaker.reportFor;
 import static com.geeksaint.traffix.maker.VehicleDataMaker.vehicleWith;
+import static com.geeksaint.traffix.util.DateSupport.addDate;
+import static com.geeksaint.traffix.util.DateSupport.timeStampToMillis;
 import static com.geeksaint.traffix.util.DateSupport.toDateOfYear;
-import static com.natpryce.makeiteasy.MakeItEasy.a;
-import static com.natpryce.makeiteasy.MakeItEasy.make;
-import static com.natpryce.makeiteasy.MakeItEasy.with;
-import static java.lang.Integer.parseInt;
-import static java.util.Arrays.asList;
+import static com.geeksaint.traffix.util.DateSupport.toMinutes;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -26,7 +23,7 @@ public class DailyTrafficDataTest {
 
   @Before
   public void setUp() throws Exception {
-    trafficData = new DailyTrafficData(3, 1, 2014);
+    trafficData = DailyTrafficData.create();
     date = toDateOfYear(3, 1, 2014);
   }
 
@@ -63,31 +60,4 @@ public class DailyTrafficDataTest {
     assertThat(trafficData.report(toMinutes("0000"), toMinutes("2400")), is(expectedReportFive));
   }
 
-  private TrafficReport reportFor(VehicleData...vehicleDataList) {
-    return make(a(Report, with(vehicleData, asList(vehicleDataList))));
-  }
-
-  private long addDate(Date date, long timeStampToMillis) {
-    return new Date(date.getTime() + timeStampToMillis).getTime();
-  }
-
-  private long timeStampToMillis(String timeStampInHHMM) {
-    long minutes = toMinutes(timeStampInHHMM);
-    return minutes * 60 * 1000;
-  }
-
-  //Converts time into minutes since 00:00
-  private int toMinutes(String timeStampInMMSS) {
-    int minutes = minuteOf(timeStampInMMSS);
-    minutes += (hourOf(timeStampInMMSS) * 60);
-    return minutes;
-  }
-
-  private int minuteOf(String timeStampInMMSS) {
-    return parseInt(timeStampInMMSS.substring(2, 4));
-  }
-
-  private int hourOf(String timeStampInMMSS) {
-    return parseInt(timeStampInMMSS.substring(0, 2));
-  }
 }

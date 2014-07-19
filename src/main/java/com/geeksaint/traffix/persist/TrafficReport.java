@@ -43,4 +43,9 @@ public class TrafficReport {
     return new TrafficReport(mergedLaneAReport, mergedLaneBReport);
   }
 
+  public static TrafficReport emptyReport() {
+    return new TrafficReport(
+        LaneReport.emptyReport(LANE_A),
+        LaneReport.emptyReport(LANE_B));
+  }
 }
