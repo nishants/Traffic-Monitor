@@ -1,7 +1,7 @@
 package com.geeksaint.traffix.maker;
 
 import com.geeksaint.traffix.VehicleData;
-import com.geeksaint.traffix.analysis.TrafficReport;
+import com.geeksaint.traffix.persist.TrafficReport;
 import com.natpryce.makeiteasy.Instantiator;
 import com.natpryce.makeiteasy.Property;
 import com.natpryce.makeiteasy.PropertyLookup;
@@ -18,7 +18,7 @@ public class TrafficReportMaker {
   public static final Instantiator<TrafficReport> Report = new Instantiator<TrafficReport>() {
     public TrafficReport instantiate(PropertyLookup<TrafficReport> lookup) {
       VehicleData aVehicleData = make(a(VehicleDataMaker.VehicleData));
-      return TrafficReport.of(lookup.valueOf(vehicleData, asList(aVehicleData)));
+      return null;
     }
   };
 }

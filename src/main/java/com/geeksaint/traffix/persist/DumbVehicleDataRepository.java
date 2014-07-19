@@ -5,8 +5,6 @@ import com.geeksaint.traffix.VehicleData;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class DumbVehicleDataRepository implements VehicleDataRepository {
   private final List<VehicleData> savedVehicleData = new ArrayList<VehicleData>();
