@@ -21,7 +21,7 @@ public class VehicleDataMaker {
 
   public static final Instantiator<VehicleData> VehicleData = new Instantiator<VehicleData>() {
     public VehicleData instantiate(PropertyLookup<VehicleData> lookup) {
-      return new VehicleData(lookup.valueOf(speed, 16f),new Date(lookup.valueOf(time, 0l)));
+      return new VehicleData(lookup.valueOf(speed, 16f), new Date(lookup.valueOf(time, 0l)), Lane.LANE_A);
     }
   };
 }

@@ -14,11 +14,11 @@ import static com.geeksaint.traffix.Lane.*;
 //Represents a reading form the source eg. A12322 or B542323
 public class Reading {
   private final Date time;
-  private final Lane laneA;
+  private final Lane lane;
 
-  protected Reading(Date time, Lane laneA) {
+  protected Reading(Date time, Lane lane) {
     this.time = time;
-    this.laneA = laneA;
+    this.lane = lane;
   }
 
   public static Reading of(Date recordedAt, Lane goingNorth) {
@@ -26,6 +26,6 @@ public class Reading {
   }
 
   public boolean isHoseA() {
-    return laneA.equals(LANE_A);
+    return lane.equals(LANE_A);
   }
 }

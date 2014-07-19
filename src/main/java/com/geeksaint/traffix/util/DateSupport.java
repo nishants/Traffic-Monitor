@@ -32,4 +32,12 @@ public class DateSupport {
     calendar.add(DAY_OF_MONTH, days);
     return calendar.getTime();
   }
+
+  public static int timeOfDayInSeconds(Date time) {
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(time);
+    return calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60+
+        calendar.get(Calendar.MINUTE) * 60+
+        calendar.get(Calendar.SECOND);
+  }
 }

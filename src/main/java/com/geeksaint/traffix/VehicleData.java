@@ -1,11 +1,14 @@
 package com.geeksaint.traffix;
 
+import com.geeksaint.traffix.util.DateSupport;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.util.Date;
 import java.util.List;
+
+import static com.geeksaint.traffix.Lane.*;
 
 //Represents one vehicle data
 @EqualsAndHashCode
@@ -14,11 +17,18 @@ public class VehicleData {
   @Getter
   private final float speed;
   private final Date timeAtHoseA;
+  @Getter
+  private final Lane lane;
   public static final float DEFAULT_AXLE_LENGTH = 2.5f;
 
-  public VehicleData(float speed, Date timeAtHoseA) {
+  public VehicleData(float speed, Date timeAtHoseA, Lane lane) {
     this.speed = speed;
     this.timeAtHoseA = timeAtHoseA;
+    this.lane = lane;
+  }
+
+  public int getTimeOfDayInSeconds(){
+    return DateSupport.timeOfDayInSeconds(timeAtHoseA);
   }
 
   public static VehicleData record(List<Reading> readings) {
@@ -27,7 +37,11 @@ public class VehicleData {
         evaluateSpeedForLaneB(readings, DEFAULT_AXLE_LENGTH);
 
     Date timeAtHoseA = frontAxleHoseATime(readings);
-    return new VehicleData(speed, timeAtHoseA);
+    return new VehicleData(speed, timeAtHoseA, laneOf(readings));
+  }
+
+  private static Lane laneOf(List<Reading> readings) {
+    return readings.size() == 2 ? LANE_A : LANE_B;
   }
 
   private static float evaluateSpeedForLaneB(List<Reading> readings, float axleLength) {
@@ -63,5 +77,9 @@ public class VehicleData {
 
   public Date getTime() {
     return timeAtHoseA;
+  }
+
+  public boolean isLaneA() {
+    return lane == LANE_A;
   }
 }
