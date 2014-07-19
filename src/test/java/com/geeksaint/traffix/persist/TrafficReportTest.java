@@ -41,4 +41,25 @@ public class TrafficReportTest {
     assertThat(trafficReport.getLaneAReport(), is(expectedLaneAReport));
     assertThat(trafficReport.getLaneBReport(), is(expectedLaneBReport));
   }
+
+  @Test
+  public void shouldMergeLaneReportsWithOtherReport(){
+    LaneReport thisLaneAReport = laneReportWith(laneAVehicles, LANE_A);
+    LaneReport thisLaneBReport = laneReportWith(laneBVehicles, LANE_B) ;
+    TrafficReport thisTrafficReport = TrafficReport.prepare(vehicleDataList);
+
+    VehicleData thatLaneAVehicle = vehicleWith(100l, 30f, LANE_A);
+    VehicleData thatLaneBVehicle = vehicleWith(150l, 25f, LANE_B);
+
+    LaneReport thatLaneAReport = laneReportWith(asList(thatLaneAVehicle), LANE_A);
+    LaneReport thatLaneBReport = laneReportWith(asList(thatLaneBVehicle), LANE_B) ;
+    TrafficReport thatTrafficReport = TrafficReport.prepare(asList(thatLaneAVehicle, thatLaneBVehicle));
+
+    LaneReport mergedLaneAReport = thisLaneAReport.merge(thatLaneAReport);
+    LaneReport mergedLaneBReport = thisLaneBReport.merge(thatLaneBReport);
+    TrafficReport mergedTrafficReport  = thisTrafficReport.merge(thatTrafficReport);
+
+    assertThat(mergedTrafficReport.getLaneAReport(), is(mergedLaneAReport));
+    assertThat(mergedTrafficReport.getLaneBReport(), is(mergedLaneBReport));
+  }
 }

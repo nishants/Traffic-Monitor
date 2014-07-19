@@ -23,7 +23,10 @@ public class LaneReport {
   final long sumOfDistances;
 
   public LaneReport merge(LaneReport withReport) {
-    return null;
+    long vehicleCount = getVehicleCount() + withReport.getVehicleCount();
+    double sumOfSpeeds = getSumOfSpeeds() + withReport.getSumOfSpeeds();
+    long sumOfDistances = getSumOfDistances() + withReport.getSumOfDistances();
+    return new LaneReport(lane, vehicleCount, sumOfSpeeds, sumOfDistances);
   }
 
   public static LaneReport prepareFor(List<VehicleData> vehicleDataList, Lane lane){

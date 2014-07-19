@@ -40,10 +40,7 @@ public class TrafficReport {
   public TrafficReport merge(TrafficReport withReport){
     LaneReport mergedLaneAReport = getLaneAReport().merge(withReport.getLaneAReport());
     LaneReport mergedLaneBReport = getLaneBReport().merge(withReport.getLaneBReport());
-    return prepare(mergedLaneAReport, mergedLaneBReport);
+    return new TrafficReport(mergedLaneAReport, mergedLaneBReport);
   }
 
-  private TrafficReport prepare(LaneReport mergedLaneAReport, LaneReport mergedLaneBReport) {
-    return null;
-  }
 }
