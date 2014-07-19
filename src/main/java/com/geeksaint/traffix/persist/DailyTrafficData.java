@@ -4,6 +4,7 @@ import com.geeksaint.traffix.VehicleData;
 import lombok.Getter;
 
 import static com.geeksaint.traffix.util.DateSupport.timeOfDayInMinutes;
+import static java.lang.Math.min;
 import static java.lang.String.format;
 
 public class DailyTrafficData implements TrafficData {
@@ -40,8 +41,18 @@ public class DailyTrafficData implements TrafficData {
   // For e.g. if fromMinute = 113, and toMinute = 237, actual data will be form 110 mins to 240 mins
   @Override
   public TrafficReport report(int fromMinute, int toMinute){
-    int slotIndex = fromMinute / SLOTS_SIZE_IN_MINUTES;
-    return slotDataList[slotIndex].getReport();
+    int fromSlotIndex = fromMinute / SLOTS_SIZE_IN_MINUTES;
+    int toSlotIndex = min(toMinute / SLOTS_SIZE_IN_MINUTES, SLOTS_PER_DAY - 1);
+    TrafficReport report = getSlotReport(fromSlotIndex);
+
+    for(int i = fromSlotIndex + 1; i <=toSlotIndex; i++){
+      report = report.merge(getSlotReport(i));
+    }
+    return report;
+  }
+
+  private TrafficReport getSlotReport(int index) {
+    return slotDataList[index].getReport();
   }
 
   private void setupSlotData() {
