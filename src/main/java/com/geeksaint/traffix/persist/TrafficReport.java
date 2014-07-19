@@ -5,7 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.geeksaint.traffix.Lane.LANE_A;
+import static com.geeksaint.traffix.Lane.LANE_B;
+import static com.geeksaint.traffix.persist.LaneReport.*;
 
 @EqualsAndHashCode
 @AllArgsConstructor
@@ -13,16 +18,21 @@ import java.util.List;
 public class TrafficReport {
   private final LaneReport laneAReport;
   private final LaneReport laneBReport;
-  private List<VehicleData> vehicleDataList;
-
-  public TrafficReport(List<VehicleData> vehicleDataList) {
-    laneAReport = null;
-    laneBReport = null;
-    this.vehicleDataList = vehicleDataList;
-  }
 
   public static TrafficReport prepare(List<VehicleData> vehicleDataList) {
-    return new TrafficReport(vehicleDataList);
+    List<VehicleData> laneAVehicles = new ArrayList<VehicleData>();
+    List<VehicleData> laneBVehicles = new ArrayList<VehicleData>();
+    for(VehicleData vehicleData : vehicleDataList){
+      if(vehicleData.isLaneA()){
+        laneAVehicles.add(vehicleData);
+      }else {
+        laneBVehicles.add(vehicleData);
+      }
+    }
+
+    return new TrafficReport(
+        prepareFor(laneAVehicles, LANE_A),
+        prepareFor(laneBVehicles, LANE_B));
   }
 
   public TrafficReport merge(TrafficReport withReport){
