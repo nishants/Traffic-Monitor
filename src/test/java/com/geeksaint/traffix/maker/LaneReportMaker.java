@@ -13,6 +13,7 @@ import static com.geeksaint.traffix.Lane.LANE_A;
 import static com.geeksaint.traffix.maker.VehicleDataMaker.*;
 import static com.natpryce.makeiteasy.MakeItEasy.a;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
+import static com.natpryce.makeiteasy.MakeItEasy.with;
 import static java.util.Arrays.asList;
 
 public class LaneReportMaker {
@@ -25,4 +26,10 @@ public class LaneReportMaker {
       return com.geeksaint.traffix.persist.LaneReport.prepareFor(vehicleDataList, lookup.valueOf(lane, LANE_A));
     }
   };
+
+  public static LaneReport laneReportWith(List<VehicleData> vehicleDataList, Lane laneForReport) {
+    return make(a(LaneReport,
+        with(vehicleData, vehicleDataList),
+        with(lane, laneForReport)));
+  }
 }

@@ -4,6 +4,7 @@ import com.geeksaint.traffix.VehicleData;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import static com.geeksaint.traffix.persist.LaneReport.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 @Getter
+@ToString
 public class TrafficReport {
   private final LaneReport laneAReport;
   private final LaneReport laneBReport;

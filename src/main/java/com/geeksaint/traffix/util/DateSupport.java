@@ -40,4 +40,9 @@ public class DateSupport {
         calendar.get(Calendar.MINUTE) * 60+
         calendar.get(Calendar.SECOND);
   }
+
+  //Converts the time into minutes past since 00:00
+  public static int timeOfDayInMinutes(Date time) {
+    return timeOfDayInSeconds(time)/60;
+  }
 }

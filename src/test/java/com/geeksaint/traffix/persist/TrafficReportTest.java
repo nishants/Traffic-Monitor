@@ -1,9 +1,6 @@
 package com.geeksaint.traffix.persist;
 
-import com.geeksaint.traffix.Lane;
 import com.geeksaint.traffix.VehicleData;
-import com.geeksaint.traffix.maker.LaneReportMaker;
-import com.geeksaint.traffix.maker.VehicleDataMaker;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,9 +8,8 @@ import java.util.List;
 
 import static com.geeksaint.traffix.Lane.LANE_A;
 import static com.geeksaint.traffix.Lane.LANE_B;
-import static com.natpryce.makeiteasy.MakeItEasy.a;
-import static com.natpryce.makeiteasy.MakeItEasy.make;
-import static com.natpryce.makeiteasy.MakeItEasy.with;
+import static com.geeksaint.traffix.maker.LaneReportMaker.laneReportWith;
+import static com.geeksaint.traffix.maker.VehicleDataMaker.vehicleWith;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -44,18 +40,5 @@ public class TrafficReportTest {
 
     assertThat(trafficReport.getLaneAReport(), is(expectedLaneAReport));
     assertThat(trafficReport.getLaneBReport(), is(expectedLaneBReport));
-  }
-
-  private LaneReport laneReportWith(List<VehicleData> laneAVehicles1, Lane laneA) {
-    return make(a(LaneReportMaker.LaneReport,
-        with(LaneReportMaker.vehicleData, laneAVehicles1),
-        with(LaneReportMaker.lane, laneA)));
-  }
-
-  private VehicleData vehicleWith(long time, float speed, Lane lane) {
-    return make(a(VehicleDataMaker.VehicleData,
-        with(VehicleDataMaker.time, time),
-        with(VehicleDataMaker.speed, speed),
-        with(VehicleDataMaker.lane, lane)));
   }
 }

@@ -3,6 +3,7 @@ package com.geeksaint.traffix.persist;
 import com.geeksaint.traffix.VehicleData;
 import lombok.Getter;
 
+import static com.geeksaint.traffix.util.DateSupport.timeOfDayInMinutes;
 import static java.lang.String.format;
 
 public class DailyTrafficData implements TrafficData {
@@ -29,13 +30,18 @@ public class DailyTrafficData implements TrafficData {
 
   //Aggregates the traffic data at slot level.
   @Override
-  public synchronized void buildIndex(){}
+  public synchronized void buildIndex(){
+    for(SlotData data : slotDataList){
+      data.prepareReport();
+    }
+  }
 
   //returns traffic report for the duration(takes the minimum 5 minutes interval that covers the duration)
   // For e.g. if fromMinute = 113, and toMinute = 237, actual data will be form 110 mins to 240 mins
   @Override
   public TrafficReport report(int fromMinute, int toMinute){
-    return null;
+    int slotIndex = fromMinute / SLOTS_SIZE_IN_MINUTES;
+    return slotDataList[slotIndex].getReport();
   }
 
   private void setupSlotData() {
@@ -45,6 +51,8 @@ public class DailyTrafficData implements TrafficData {
   }
 
   private SlotData slotFor(VehicleData vehicleData) {
-    return null;
+    int timeInMinutes = timeOfDayInMinutes(vehicleData.getTime());
+    int slotIndex = timeInMinutes / SLOTS_SIZE_IN_MINUTES;
+    return slotDataList[slotIndex];
   }
 }
