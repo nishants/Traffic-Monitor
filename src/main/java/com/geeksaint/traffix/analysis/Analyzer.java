@@ -19,12 +19,18 @@ public class Analyzer {
 
   // List containing morning traffic reports, each element representing one day
   public List<TrafficReport> morningTraffic(){
-    return null;
+    return dataRepository.reportForDuration(
+        MORNING_START_TIME_IN_MINUTES,
+        MORNING_END_TIME_IN_MINUTES
+    ).getReports();
   }
 
   // List containing evening traffic reports, each element representing one day
   public List<TrafficReport> eveningTraffic(){
-    return null;
+    return dataRepository.reportForDuration(
+        EVENING_START_TIME_IN_MINUTES,
+        EVENING_END_TIME_IN_MINUTES
+    ).getReports();
   }
 
   // Each element representing ordered list of durations for one day
@@ -32,7 +38,7 @@ public class Analyzer {
   // value.get(0) : report for day 1
   // value.get(0).get(3) : report for day 1, fourth hour of the day
   public List<List<TrafficReport>> hourlyTrafficReport(){
-    return null;
+    return dataRepository.reportForIntervals(60).getReports();
   }
 
   // Each element representing ordered list of durations for one day
@@ -40,7 +46,7 @@ public class Analyzer {
   // value.get(0) : report for day 1
   // value.get(0).get(3) : report for day 1, fourth half-hour of the day
   public List<List<TrafficReport>> halfHourlyTrafficReport(){
-    return null;
+    return dataRepository.reportForIntervals(30).getReports();
   }
 
 
@@ -49,7 +55,7 @@ public class Analyzer {
   // value.get(0) : report for day 1
   // value.get(0).get(3) : report for day 1, 01:00 to 01:20(i.e. fourth 20 min duration)
   public List<List<TrafficReport>> reportPer20Minutes(){
-    return null;
+    return dataRepository.reportForIntervals(20).getReports();
   }
 
   // Each element representing ordered list of durations for one day
@@ -57,7 +63,7 @@ public class Analyzer {
   // value.get(0) : report for day 1
   // value.get(0).get(3) : report for day 1, 00:45 to 01:00(i.e. fourth 15 min duration)
   public List<List<TrafficReport>> reportPer15Minutes(){
-    return null;
+    return dataRepository.reportForIntervals(15).getReports();
   }
 
   //Average of all the day
