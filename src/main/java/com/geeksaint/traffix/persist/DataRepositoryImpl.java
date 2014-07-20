@@ -57,6 +57,15 @@ public class DataRepositoryImpl implements DataRepository {
   }
 
   @Override
+  public List<VehicleData> unorderedAllVehicleData() {
+    List<VehicleData> allData = new ArrayList<VehicleData>();
+    for(TrafficDataStore store : dayWiseData.values()){
+      allData.addAll(store.getAllVehicleData());
+    }
+    return allData;
+  }
+
+  @Override
   public DurationReport reportForDuration(int fromMinute, int toMinute) {
     List<TrafficReport> reports = new ArrayList<TrafficReport>();
     for(TrafficDataStore trafficDataStore : dayWiseData.values()){

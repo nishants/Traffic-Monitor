@@ -2,6 +2,8 @@ package com.geeksaint.traffix.persist;
 
 import com.geeksaint.traffix.VehicleData;
 
+import java.util.List;
+
 public interface TrafficDataStore {
   // Add a vehicle data
   //May throw exception if index is already built
@@ -12,4 +14,6 @@ public interface TrafficDataStore {
 
   //Prepares report for the specified duration
   TrafficReport report(int fromMinute, int toMinute);
+
+  List<VehicleData> getAllVehicleData();
 }

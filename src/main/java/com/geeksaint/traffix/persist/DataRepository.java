@@ -4,6 +4,8 @@ import com.geeksaint.traffix.DurationReport;
 import com.geeksaint.traffix.IntervalReport;
 import com.geeksaint.traffix.VehicleData;
 
+import java.util.List;
+
 public interface DataRepository {
   void save(VehicleData vehicleOne);
 
@@ -15,4 +17,6 @@ public interface DataRepository {
 
   // Prepare data for reporting
   void buildIndex();
+
+  List<VehicleData> unorderedAllVehicleData();
 }

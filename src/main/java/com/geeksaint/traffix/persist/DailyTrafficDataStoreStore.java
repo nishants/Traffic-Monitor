@@ -2,6 +2,9 @@ package com.geeksaint.traffix.persist;
 
 import com.geeksaint.traffix.VehicleData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.geeksaint.traffix.util.DateSupport.timeOfDayInMinutes;
 import static java.lang.Math.min;
 
@@ -42,6 +45,15 @@ public class DailyTrafficDataStoreStore implements TrafficDataStore {
       report = report.merge(getSlotReport(i));
     }
     return report;
+  }
+
+  @Override
+  public List<VehicleData> getAllVehicleData() {
+    List<VehicleData> allData = new ArrayList<VehicleData>();
+    for(SlotData slotData : slotDataList){
+      allData.addAll(slotData.getVehicleDataList());
+    }
+    return allData;
   }
 
   private TrafficReport getSlotReport(int index) {
