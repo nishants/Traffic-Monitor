@@ -2,7 +2,7 @@ package com.geeksaint.traffix.persist;
 
 import com.geeksaint.traffix.VehicleData;
 
-public interface TrafficData {
+public interface TrafficDataStore {
   // Add a vehicle data
   //May throw exception if index is already built
   void add(VehicleData vehicleData);

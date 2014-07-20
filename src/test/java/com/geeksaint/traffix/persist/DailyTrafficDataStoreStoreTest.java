@@ -17,13 +17,13 @@ import static com.geeksaint.traffix.util.DateSupport.toMinutes;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class DailyTrafficDataTest {
-  private TrafficData trafficData;
+public class DailyTrafficDataStoreStoreTest {
+  private TrafficDataStore trafficDataStore;
   private Date date;
 
   @Before
   public void setUp() throws Exception {
-    trafficData = DailyTrafficData.create();
+    trafficDataStore = DailyTrafficDataStoreStore.create();
     date = toDateOfYear(3, 1, 2014);
   }
 
@@ -44,20 +44,20 @@ public class DailyTrafficDataTest {
     TrafficReport expectedReportFour = expectedReportZero.merge(expectedReportOne).merge(expectedReportTwo);
     TrafficReport expectedReportFive =expectedReportZero.merge(expectedReportOne).merge(expectedReportTwo).merge(expectedReportThree);
 
-    trafficData.add(vehicleZero);
-    trafficData.add(vehicleOne);
-    trafficData.add(vehicleTwo);
-    trafficData.add(vehicleThree);
-    trafficData.add(vehicleFour);
-    trafficData.add(vehicleFive);
-    trafficData.buildIndex();
+    trafficDataStore.add(vehicleZero);
+    trafficDataStore.add(vehicleOne);
+    trafficDataStore.add(vehicleTwo);
+    trafficDataStore.add(vehicleThree);
+    trafficDataStore.add(vehicleFour);
+    trafficDataStore.add(vehicleFive);
+    trafficDataStore.buildIndex();
 
-    assertThat(trafficData.report(toMinutes("0300"), toMinutes("0305")), is(expectedReportOne));
-    assertThat(trafficData.report(toMinutes("0315"), toMinutes("0316")), is(expectedReportTwo));
-    assertThat(trafficData.report(toMinutes("0220"), toMinutes("0225")), is(expectedReportZero));
-    assertThat(trafficData.report(toMinutes("1420"), toMinutes("1425")), is(expectedReportThree));
-    assertThat(trafficData.report(toMinutes("0200"), toMinutes("0325")), is(expectedReportFour));
-    assertThat(trafficData.report(toMinutes("0000"), toMinutes("2400")), is(expectedReportFive));
+    assertThat(trafficDataStore.report(toMinutes("0300"), toMinutes("0305")), is(expectedReportOne));
+    assertThat(trafficDataStore.report(toMinutes("0315"), toMinutes("0316")), is(expectedReportTwo));
+    assertThat(trafficDataStore.report(toMinutes("0220"), toMinutes("0225")), is(expectedReportZero));
+    assertThat(trafficDataStore.report(toMinutes("1420"), toMinutes("1425")), is(expectedReportThree));
+    assertThat(trafficDataStore.report(toMinutes("0200"), toMinutes("0325")), is(expectedReportFour));
+    assertThat(trafficDataStore.report(toMinutes("0000"), toMinutes("2400")), is(expectedReportFive));
   }
 
 }

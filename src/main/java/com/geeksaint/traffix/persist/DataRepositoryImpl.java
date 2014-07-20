@@ -14,7 +14,7 @@ import static com.geeksaint.traffix.util.DateSupport.toDateOfYear;
 import static com.geeksaint.traffix.util.DateSupport.toDateStamp;
 
 public class DataRepositoryImpl implements DataRepository {
-  private final Map<String,TrafficData> dayWiseData = new LinkedHashMap<String, TrafficData>();
+  private final Map<String,TrafficDataStore> dayWiseData = new LinkedHashMap<String, TrafficDataStore>();
   private Date sessionStartTime;
 
   @Override
@@ -51,27 +51,27 @@ public class DataRepositoryImpl implements DataRepository {
 
   @Override
   public void buildIndex() {
-    for(TrafficData trafficData : dayWiseData.values()){
-      trafficData.buildIndex();
+    for(TrafficDataStore trafficDataStore : dayWiseData.values()){
+      trafficDataStore.buildIndex();
     }
   }
 
   @Override
   public DurationReport reportForDuration(int fromMinute, int toMinute) {
     List<TrafficReport> reports = new ArrayList<TrafficReport>();
-    for(TrafficData trafficData : dayWiseData.values()){
-      reports.add(trafficData.report(fromMinute, toMinute));
+    for(TrafficDataStore trafficDataStore : dayWiseData.values()){
+      reports.add(trafficDataStore.report(fromMinute, toMinute));
     }
     return DurationReport.prepare(sessionStartTime, reports);
   }
 
   private void checkDataExistsFor(String day) {
     if(getStoreFor(day) == null){
-      dayWiseData.put(day, DailyTrafficData.create());
+      dayWiseData.put(day, DailyTrafficDataStoreStore.create());
     }
   }
 
-  private TrafficData getStoreFor(String day) {
+  private TrafficDataStore getStoreFor(String day) {
     return dayWiseData.get(day);
   }
 }

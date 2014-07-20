@@ -5,12 +5,12 @@ import com.geeksaint.traffix.VehicleData;
 import static com.geeksaint.traffix.util.DateSupport.timeOfDayInMinutes;
 import static java.lang.Math.min;
 
-public class DailyTrafficData implements TrafficData {
+public class DailyTrafficDataStoreStore implements TrafficDataStore {
   private final int SLOTS_PER_DAY = 288;
   private final int SLOTS_SIZE_IN_MINUTES = 5;
   private final SlotData[] slotDataList ;
 
-  public DailyTrafficData(){
+  public DailyTrafficDataStoreStore(){
     slotDataList = new SlotData[SLOTS_PER_DAY];
     setupSlotData();
   }
@@ -60,7 +60,7 @@ public class DailyTrafficData implements TrafficData {
     return slotDataList[slotIndex];
   }
 
-  public static TrafficData create() {
-    return new DailyTrafficData();
+  public static TrafficDataStore create() {
+    return new DailyTrafficDataStoreStore();
   }
 }
