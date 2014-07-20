@@ -11,12 +11,16 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.geeksaint.traffix.Lane.LANE_B;
 import static com.geeksaint.traffix.analysis.Analyzer.EVENING_END_TIME_IN_MINUTES;
 import static com.geeksaint.traffix.analysis.Analyzer.EVENING_START_TIME_IN_MINUTES;
 import static com.geeksaint.traffix.analysis.Analyzer.MORNING_END_TIME_IN_MINUTES;
 import static com.geeksaint.traffix.analysis.Analyzer.MORNING_START_TIME_IN_MINUTES;
+import static com.geeksaint.traffix.maker.TrafficReportMaker.aReportFor;
+import static com.geeksaint.traffix.maker.VehicleDataMaker.vehicleWith;
 import static com.natpryce.makeiteasy.MakeItEasy.a;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
+import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -97,6 +101,49 @@ public class AnalyzerTest {
     List<List<TrafficReport>> expectedReports = anIntervalReport.getReports();
 
     assertThat(analyzer.reportPer15Minutes(), is(expectedReports));
+  }
+
+  @Test
+  public void shouldCalculateAverageOfReports(){
+    TrafficReport reportOne = aReportFor(vehicleWith(100l, 39f, LANE_B));
+    TrafficReport reportTwo = aReportFor(vehicleWith(200l, 39f, LANE_B));
+    TrafficReport reportThree = aReportFor(vehicleWith(300l, 39f, LANE_B));
+
+    TrafficReport expectedReport = reportOne.merge(reportTwo).merge(reportThree);
+
+    assertThat(Analyzer.averageOf(asList(reportOne, reportTwo, reportThree)), is(expectedReport));
+  }
+
+  @Test
+  public void shouldCalculateAverageOfIntervalReports(){
+    TrafficReport dayOneReportOne = aReportFor(vehicleWith(100l, 39f, LANE_B));
+    TrafficReport dayOneReportTwo = aReportFor(vehicleWith(200l, 39f, LANE_B));
+    TrafficReport dayOneReportThree = aReportFor(vehicleWith(300l, 39f, LANE_B));
+
+    TrafficReport dayTwoReportOne = aReportFor(vehicleWith(400l, 39f, LANE_B));
+    TrafficReport dayTwoReportTwo = aReportFor(vehicleWith(500l, 39f, LANE_B));
+    TrafficReport dayTwoReportThree = aReportFor(vehicleWith(600l, 39f, LANE_B));
+
+    TrafficReport dayThreeReportOne = aReportFor(vehicleWith(700l, 39f, LANE_B));
+    TrafficReport dayThreeReportTwo = aReportFor(vehicleWith(100l, 39f, LANE_B));
+    TrafficReport dayThreeReportThree = aReportFor(vehicleWith(100l, 39f, LANE_B));
+
+    List<TrafficReport> dayOneReport   = asList(dayOneReportOne,   dayOneReportTwo,   dayOneReportThree);
+    List<TrafficReport> dayTwoReport   = asList(dayTwoReportOne,   dayTwoReportTwo,   dayTwoReportThree);
+    List<TrafficReport> dayThreeReport = asList(dayThreeReportOne, dayThreeReportTwo, dayThreeReportThree);
+
+    List<List<TrafficReport>> intervalReport = asList(
+        dayOneReport,
+        dayTwoReport,
+        dayThreeReport
+    );
+
+    List<TrafficReport> expected = asList(
+        dayOneReportOne.merge(dayTwoReportOne).merge(dayThreeReportOne),
+        dayOneReportTwo.merge(dayTwoReportTwo).merge(dayThreeReportTwo),
+        dayOneReportThree.merge(dayTwoReportThree).merge(dayThreeReportThree)
+    );
+    assertThat(Analyzer.averageOfIntervals(intervalReport), is(expected));
   }
 
 }

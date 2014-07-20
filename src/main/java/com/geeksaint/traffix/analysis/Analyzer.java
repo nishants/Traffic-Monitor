@@ -4,6 +4,7 @@ import com.geeksaint.traffix.persist.DataRepository;
 import com.geeksaint.traffix.persist.TrafficReport;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,12 +69,27 @@ public class Analyzer {
 
   //Average of all the day
   public static TrafficReport averageOf(List<TrafficReport> reports){
-    return null;
+    TrafficReport result = TrafficReport.emptyReport();
+    for(TrafficReport report : reports){
+      result = result.merge(report);
+    }
+    return result;
   }
 
   //Average of all the day for intervals
   public static List<TrafficReport> averageOfIntervals(List<List<TrafficReport>> reports){
-    return null;
+    List<TrafficReport> result = new ArrayList<TrafficReport>();
+    int intervals = reports.get(0).size();
+    int totalDays = reports.size();
+    for(int interval=0;interval< intervals;interval++){
+      TrafficReport intervalReport = TrafficReport.emptyReport();
+      for(int day = 0; day < totalDays; day++){
+        intervalReport = intervalReport.merge(reports.get(day).get(interval));
+      }
+      result.add(interval, intervalReport);
+
+    }
+    return result;
   }
 
   //Duration must be in multiple of 5 minutes

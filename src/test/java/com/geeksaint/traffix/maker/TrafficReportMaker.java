@@ -12,6 +12,7 @@ import static com.geeksaint.traffix.maker.VehicleDataMaker.*;
 import static com.geeksaint.traffix.persist.TrafficReport.prepare;
 import static com.natpryce.makeiteasy.MakeItEasy.a;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
+import static com.natpryce.makeiteasy.MakeItEasy.with;
 import static java.util.Arrays.asList;
 
 public class TrafficReportMaker {
@@ -22,4 +23,8 @@ public class TrafficReportMaker {
       return prepare(lookup.valueOf(vehicleData, asList(make(a(VehicleData)))));
     }
   };
+
+  public static TrafficReport aReportFor(VehicleData...vehicleDataList){
+    return make(a(Report, with(vehicleData, asList(vehicleDataList))));
+  }
 }
