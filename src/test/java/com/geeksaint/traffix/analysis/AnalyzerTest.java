@@ -2,6 +2,7 @@ package com.geeksaint.traffix.analysis;
 
 import com.geeksaint.traffix.DurationReport;
 import com.geeksaint.traffix.IntervalReport;
+import com.geeksaint.traffix.VehicleData;
 import com.geeksaint.traffix.maker.DurationReportMaker;
 import com.geeksaint.traffix.maker.IntervalReportMaker;
 import com.geeksaint.traffix.persist.DataRepository;
@@ -185,6 +186,29 @@ public class AnalyzerTest {
     expected.put(12 * 60, 2l);
     expected.put(0, 1l);
     assertThat(analyzer.durationsInOrderOfTraffic(peakPeriodSize), is(expected));
+  }
 
+
+  @Test
+  public void shouldReturnSpeedDistribution(){
+    List<VehicleData> allVehicles = asList(
+        vehicleWith(100l, 14f, LANE_A),
+        vehicleWith(100l, 16f, LANE_A),
+        vehicleWith(100l, 12f, LANE_A),
+        vehicleWith(100l, 14f, LANE_A),
+        vehicleWith(100l, 16f, LANE_A),
+        vehicleWith(100l, 21f, LANE_A),
+        vehicleWith(100l, 16f, LANE_A)
+    );
+    when(repository.unorderedAllVehicleData()).thenReturn(allVehicles);
+
+    Map<Float, Long> expected = new LinkedHashMap<Float, Long>();
+    expected.put(12f, 1l);
+    expected.put(14f, 2l);
+    expected.put(16f, 3l);
+    expected.put(21f, 1l);
+
+
+    assertThat(analyzer.speedDistribution(), is(expected));
   }
 }

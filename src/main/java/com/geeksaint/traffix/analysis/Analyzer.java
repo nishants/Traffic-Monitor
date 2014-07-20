@@ -1,5 +1,6 @@
 package com.geeksaint.traffix.analysis;
 
+import com.geeksaint.traffix.VehicleData;
 import com.geeksaint.traffix.persist.DataRepository;
 import com.geeksaint.traffix.persist.TrafficReport;
 import lombok.AllArgsConstructor;
@@ -117,10 +118,22 @@ public class Analyzer {
     return sortedByTraffic;
   }
 
-  // maps  a speeding range of 5ps to the number of vehicles at the speed.
-  // e.g 0-5mps: 25, 5-10mps : 30
-  public Map<Integer, Long> speedDistribution(int durationSize){
-    return null;
+  // return ordered map of speed distributions
+  public Map<Float, Long> speedDistribution(){
+    List<VehicleData> vehicleDataList = dataRepository.unorderedAllVehicleData();
+    Map<Float, Long> speedDistribution = new LinkedHashMap<Float, Long>();
+    for(VehicleData vehicleData : vehicleDataList){
+      addToMap(speedDistribution, vehicleData.getSpeed());
+    }
+    return speedDistribution;
+  }
+
+  private Long addToMap(Map<Float, Long> speedDistribution, float speed) {
+    long count = 0;
+    if(speedDistribution.containsKey(speed)){
+      count = speedDistribution.get(speed);
+    }
+    return speedDistribution.put(speed, count+1);
   }
 
 }
