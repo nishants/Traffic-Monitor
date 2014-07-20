@@ -5,8 +5,10 @@ import com.geeksaint.traffix.persist.TrafficReport;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 //Interface to the API
 @AllArgsConstructor
@@ -92,11 +94,27 @@ public class Analyzer {
     return result;
   }
 
-  //Duration must be in multiple of 5 minutes
+  // Duration must be in multiple of 5 minutes
+  // returns a sorted map
   // returns the durations in order of traffic times
   // returned type maps a peak time starting point(in minutes) to average traffic in duration across all days.
-  public Map<Integer, Long> peakTimes(int durationSize){
-    return null;
+  public Map<Integer, Long> durationsInOrderOfTraffic(int durationSizeInMinutes){
+    List<TrafficReport> trafficReports = averageOfIntervals(dataRepository.reportForIntervals(durationSizeInMinutes).getReports());
+    Map<Long, Integer> sortedWithIndex = trafficToIntervalMap(trafficReports);
+    Map<Integer, Long> result = new LinkedHashMap<Integer, Long>();
+    for(Long value : sortedWithIndex.keySet()){
+      result.put(sortedWithIndex.get(value) * durationSizeInMinutes, value);
+    }
+
+    return result;
+  }
+
+  private Map<Long, Integer> trafficToIntervalMap(List<TrafficReport> trafficReports) {
+    Map<Long, Integer> sortedByTraffic = new TreeMap<Long, Integer>();
+    for(int i =0; i < trafficReports.size(); i++){
+      sortedByTraffic.put(trafficReports.get(i).getVehicleCount(), i);
+    }
+    return sortedByTraffic;
   }
 
   // maps  a speeding range of 5ps to the number of vehicles at the speed.

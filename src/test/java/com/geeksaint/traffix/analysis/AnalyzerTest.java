@@ -9,8 +9,11 @@ import com.geeksaint.traffix.persist.TrafficReport;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import static com.geeksaint.traffix.Lane.LANE_A;
 import static com.geeksaint.traffix.Lane.LANE_B;
 import static com.geeksaint.traffix.analysis.Analyzer.EVENING_END_TIME_IN_MINUTES;
 import static com.geeksaint.traffix.analysis.Analyzer.EVENING_START_TIME_IN_MINUTES;
@@ -18,6 +21,7 @@ import static com.geeksaint.traffix.analysis.Analyzer.MORNING_END_TIME_IN_MINUTE
 import static com.geeksaint.traffix.analysis.Analyzer.MORNING_START_TIME_IN_MINUTES;
 import static com.geeksaint.traffix.maker.TrafficReportMaker.aReportFor;
 import static com.geeksaint.traffix.maker.VehicleDataMaker.vehicleWith;
+import static com.geeksaint.traffix.util.DateSupport.timeStampToMillis;
 import static com.natpryce.makeiteasy.MakeItEasy.a;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
 import static java.util.Arrays.asList;
@@ -146,4 +150,41 @@ public class AnalyzerTest {
     assertThat(Analyzer.averageOfIntervals(intervalReport), is(expected));
   }
 
+  @Test
+  public void shouldCalculatePeakTimes(){
+    List<TrafficReport> reportForDayOne = asList(
+        aReportFor(
+            vehicleWith(timeStampToMillis("0221"), 20f, LANE_A)
+            ),
+        aReportFor(
+            vehicleWith(timeStampToMillis("0821"), 20f, LANE_A),
+            vehicleWith(timeStampToMillis("0831"), 20f, LANE_A),
+            vehicleWith(timeStampToMillis("0901"), 20f, LANE_A)
+        ),
+        aReportFor(
+            vehicleWith(timeStampToMillis("1421"), 20f, LANE_A),
+            vehicleWith(timeStampToMillis("1422"), 20f, LANE_A)
+        ),
+        aReportFor(
+            vehicleWith(timeStampToMillis("1821"), 20f, LANE_A),
+            vehicleWith(timeStampToMillis("1821"), 20f, LANE_A),
+            vehicleWith(timeStampToMillis("1921"), 20f, LANE_A),
+            vehicleWith(timeStampToMillis("1921"), 20f, LANE_A)
+        )
+    );
+
+    IntervalReport report = mock(IntervalReport.class);
+    when(report.getReports()).thenReturn(asList(reportForDayOne));
+
+    int peakPeriodSize = 6*60;
+    when(repository.reportForIntervals(peakPeriodSize)).thenReturn(report);
+
+    Map<Integer, Long> expected = new LinkedHashMap<Integer, Long>();
+    expected.put(18 * 60, 4l);
+    expected.put(6 * 60, 3l);
+    expected.put(12 * 60, 2l);
+    expected.put(0, 1l);
+    assertThat(analyzer.durationsInOrderOfTraffic(peakPeriodSize), is(expected));
+
+  }
 }

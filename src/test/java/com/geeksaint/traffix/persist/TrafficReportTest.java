@@ -71,4 +71,13 @@ public class TrafficReportTest {
     assertThat(emptyReport.getLaneAReport(), is(emptyLaneAReport));
     assertThat(emptyReport.getLaneBReport(), is(emptyLaneBReport));
   }
+
+  @Test
+  public void shouldReturnVehicleCount(){
+    TrafficReport trafficReport = TrafficReport.prepare(vehicleDataList);
+    long expectedVehicleCount = trafficReport.getLaneAReport().getVehicleCount()
+        + trafficReport.getLaneAReport().getVehicleCount();
+    assertThat(trafficReport.getVehicleCount(), is(expectedVehicleCount));
+
+  }
 }

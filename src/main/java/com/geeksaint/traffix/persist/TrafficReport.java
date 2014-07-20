@@ -48,4 +48,8 @@ public class TrafficReport {
         LaneReport.emptyReport(LANE_A),
         LaneReport.emptyReport(LANE_B));
   }
+
+  public Long getVehicleCount() {
+    return laneAReport.getVehicleCount() + laneBReport.getVehicleCount();
+  }
 }
