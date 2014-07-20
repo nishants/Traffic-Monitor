@@ -17,13 +17,12 @@ import static com.geeksaint.traffix.util.DateSupport.addDate;
 import static com.geeksaint.traffix.util.DateSupport.increment;
 import static com.geeksaint.traffix.util.DateSupport.timeStampToMillis;
 import static com.geeksaint.traffix.util.DateSupport.toDateOfYear;
-import static com.geeksaint.traffix.util.DateSupport.toMinutes;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class DataRepositoryTestForIntervalReport {
 
-  private VehicleDataRepository repository;
+  private DataRepository repository;
   private Date date;
   @Rule
   public ExpectedException expectedException = ExpectedException.none();
@@ -36,7 +35,7 @@ public class DataRepositoryTestForIntervalReport {
 
   @Before
   public void setup(){
-    repository = new DataRepository();
+    repository = new DataRepositoryImpl();
     date = toDateOfYear(3, 1, 2014);
     VehicleData vehicleZero   = vehicleWith(addDate(date, timeStampToMillis("0605")), 39f, LANE_B);
     VehicleData vehicleOne    = vehicleWith(addDate(date, timeStampToMillis("1300")), 30f, LANE_A);

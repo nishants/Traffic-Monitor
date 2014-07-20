@@ -20,12 +20,12 @@ import static org.junit.Assert.assertThat;
 
 public class DataRepositoryTestForDurationReport {
 
-  private VehicleDataRepository repository;
+  private DataRepository repository;
   private Date date;
 
   @Before
   public void setup(){
-    repository = new DataRepository();
+    repository = new DataRepositoryImpl();
     date = toDateOfYear(3, 1, 2014);
   }
 
