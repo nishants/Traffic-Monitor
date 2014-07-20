@@ -18,7 +18,7 @@ import static com.geeksaint.traffix.util.DateSupport.toMinutes;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class DataRepositoryTest {
+public class DataRepositoryTestForDurationReport {
 
   private VehicleDataRepository repository;
   private Date date;
@@ -52,11 +52,12 @@ public class DataRepositoryTest {
     repository.save(vehicleFive);
     repository.buildIndex();
 
-    assertThat(repository.report(toMinutes("0300"), toMinutes("0305")).getForDay(0), is(expectedReportOne));
-    assertThat(repository.report(toMinutes("0315"), toMinutes("0316")).getForDay(1), is(expectedReportTwo));
-    assertThat(repository.report(toMinutes("0220"), toMinutes("0225")).getForDay(0), is(expectedReportZero));
-    assertThat(repository.report(toMinutes("1420"), toMinutes("1425")).getForDay(1), is(expectedReportThree));
-    assertThat(repository.report(toMinutes("0200"), toMinutes("0325")).getForDay(0), is(expectedReportFour));
-    assertThat(repository.report(toMinutes("0200"), toMinutes("0325")).getForDay(1), is(expectedReportTwo));
+    assertThat(repository.reportForDuration(toMinutes("0300"), toMinutes("0305")).getSessionStartTime(), is(date));
+    assertThat(repository.reportForDuration(toMinutes("0300"), toMinutes("0305")).getForDay(0), is(expectedReportOne));
+    assertThat(repository.reportForDuration(toMinutes("0315"), toMinutes("0316")).getForDay(1), is(expectedReportTwo));
+    assertThat(repository.reportForDuration(toMinutes("0220"), toMinutes("0225")).getForDay(0), is(expectedReportZero));
+    assertThat(repository.reportForDuration(toMinutes("1420"), toMinutes("1425")).getForDay(1), is(expectedReportThree));
+    assertThat(repository.reportForDuration(toMinutes("0200"), toMinutes("0325")).getForDay(0), is(expectedReportFour));
+    assertThat(repository.reportForDuration(toMinutes("0200"), toMinutes("0325")).getForDay(1), is(expectedReportTwo));
   }
 }

@@ -1,5 +1,6 @@
 package com.geeksaint.traffix;
 
+import com.geeksaint.traffix.maker.DurationReportMaker;
 import com.geeksaint.traffix.maker.TrafficReportMaker;
 import com.geeksaint.traffix.persist.TrafficReport;
 import org.junit.Before;
@@ -7,9 +8,9 @@ import org.junit.Test;
 
 import java.util.Date;
 
-import static com.geeksaint.traffix.DurationReport.*;
 import static com.geeksaint.traffix.Lane.LANE_A;
 import static com.geeksaint.traffix.Lane.LANE_B;
+import static com.geeksaint.traffix.maker.DurationReportMaker.makeReport;
 import static com.geeksaint.traffix.maker.VehicleDataMaker.vehicleWith;
 import static com.geeksaint.traffix.util.DateSupport.timeStampToMillis;
 import static com.natpryce.makeiteasy.MakeItEasy.a;
@@ -35,7 +36,7 @@ public class DurationReportTest {
     reportOne = make(a(TrafficReportMaker.Report, with(TrafficReportMaker.vehicleData, asList(vehicleOne))));
     reportTwo = make(a(TrafficReportMaker.Report, with(TrafficReportMaker.vehicleData, asList(vehicleTwo))));
 
-    durationReport = prepare(date, asList(reportOne, reportTwo));
+    durationReport = makeReport(date, reportOne, reportTwo);
   }
 
   @Test
