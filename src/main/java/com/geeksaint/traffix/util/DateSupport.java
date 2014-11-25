@@ -58,7 +58,7 @@ public class DateSupport {
   public static String toDateStamp(Date date) {
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(date);
-    SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMYY");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyy");
     return dateFormat.format(date);
   }
 
